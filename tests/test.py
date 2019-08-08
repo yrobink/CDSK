@@ -162,6 +162,37 @@ def test_mira( plot = True ):##{{{
 		print( "Test Mira (Fail)  " )
 ##}}}
 
+def test_local_dimension( plot = True ):
+	print( "Test local dimension..." , end = "\r" )
+#	try:
+	l63 = sk.Lorenz63()
+	X0  = l63.orbit( np.linspace( 0 , 100 , 100 ) )[-1,:]
+	X   = l63.orbit( np.linspace( 0 , 100 , 10000 ) , X0 = X0 )
+	
+	ld0,th0 = sk.localDimension(X[:,1:]    , n_jobs = 6 )
+	ld1,th1 = sk.localDimension(X[:,[0,2]] , n_jobs = 6 )
+	ld2,th2 = sk.localDimension(X[:,:2]    , n_jobs = 6 )
+	print(np.mean(ld0))
+	print(np.mean(ld1))
+	print(np.mean(ld2))
+	vmin,vmax = np.quantile( np.vstack( (ld0,ld1,ld2) ) , [0.1,0.9] )
+	
+	
+	if plot:
+		fig = plt.figure( figsize = (14,7) )
+		ax = fig.add_subplot( 1 , 3 , 1 )
+		ax.scatter( X[:,1] , X[:,2] , s = 2. , c = ld0 , cmap = plt.cm.inferno , vmin = vmin , vmax = vmax )
+		ax = fig.add_subplot( 1 , 3 , 2 )
+		ax.scatter( X[:,0] , X[:,2] , s = 2. , c = ld1 , cmap = plt.cm.inferno , vmin = vmin , vmax = vmax )
+		ax = fig.add_subplot( 1 , 3 , 3 )
+		ax.scatter( X[:,0] , X[:,1] , s = 2. , c = ld2 , cmap = plt.cm.inferno , vmin = vmin , vmax = vmax )
+		
+		fig.set_tight_layout(True)
+		plt.show()
+	print( "Test local dimension (Done)  " )
+#	except:
+#		print( "Test local dimension (Fail)  " )
+
 
 def run_all_tests( plot = False ):##{{{
 	test_lorenz63(plot)
@@ -189,7 +220,8 @@ if __name__ == "__main__":
 	print(sk.__version__)
 	
 	## Now tests
-	run_all_tests()
+#	run_all_tests()
+	test_local_dimension(True)
 	
 	print("Done")
 
