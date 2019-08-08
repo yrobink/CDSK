@@ -15,8 +15,8 @@ from .__DiffDynSyst import DiffDynSyst
 
 class Lorenz84(DiffDynSyst):
 	"""
-		Apyga.dynamic.continuous.Lorenz84
-		=================================
+		CDSK.Lorenz84
+		=============
 
 		Description
 		-----------
@@ -28,11 +28,11 @@ class Lorenz84(DiffDynSyst):
 
 	"""
 	
-	class TimeForcing:
+	class TimeForcing:##{{{
 		"""
-			Apyga.dynamic.continuous.Lorenz84.TimeForcing
-			=============================================
-
+			CDSK.Lorenz84.TimeForcing
+			=========================
+			
 			Description
 			-----------
 			Time forcing of Lorenz84 model
@@ -42,7 +42,7 @@ class Lorenz84(DiffDynSyst):
 				Description
 				-----------
 				Constant forcing, fixed at value 6.
-
+				
 				Parameters
 				----------
 				t    : float
@@ -64,7 +64,7 @@ class Lorenz84(DiffDynSyst):
 					Time
 			"""
 			return 9.5 + 2. * np.sin( t * 2. * np.pi / 73. )
-
+		
 		def linear( t , tcc = 100 * 73 ):
 			"""
 				Description
@@ -81,6 +81,7 @@ class Lorenz84(DiffDynSyst):
 					Starting time of forcing, default is 100 * 73 units of time (year 100)
 				"""
 			return 0 if t < tcc else -2 * ( t - tcc ) / tcc
+	##}}}
 	
 	def __init__( self , a = 0.25 , b = 4. , G = 1. , F = None , size = 1 ):
 		"""
@@ -93,14 +94,14 @@ class Lorenz84(DiffDynSyst):
 			G    : float
 				default = 1.
 			F    : callable or string
-			   The time forcing function. default = Apyga.dynamic.continuous.Lorenz84.TimeForcing.constant
+			   The time forcing function. default = CDSK.Lorenz84.TimeForcing.constant
 					If type(F) == str:
 					=> "cyclic"        : seasonal cycle ( == Lorenz84.TimeForcing.cyclic )
 					=> "linear"        : linear forcing ( == Lorenz84.TimeForcing.linear )
 					=> "cyclic-linear" : seasonal cycle + linear forcing ( == Lorenz84.TimeForcing.cyclic + Lorenz84.TimeForcing.linear )
 			size : int
 			   Numbers of orbits must be computed
-
+			
 			Fix initializations
 			-------------------
 			dim    : Initialized at 3
@@ -122,8 +123,8 @@ class Lorenz84(DiffDynSyst):
 				self.F = lambda t : self.TimeForcing.cyclic(t) + self.TimeForcing.linear(t)
 		else:
 			self.F = self.TimeForcing.constant
-
-
+	
+	
 	def _equation( self , X , t ):
 		dX = np.zeros(X.shape)
 		dX[self._i[0]] = - X[self._i[1]]**2 - X[self._i[2]]**2 - self.a * X[self._i[0]] + self.a * self.F(t)
