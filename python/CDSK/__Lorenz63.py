@@ -15,8 +15,8 @@ from .__DiffDynSyst import DiffDynSyst
 
 class Lorenz63(DiffDynSyst):
 	"""
-		Apyga.dynamic.continuous.Lorenz63
-		=================================
+		CDSK.Lorenz63
+		=============
 
 		Description
 		-----------
@@ -28,7 +28,7 @@ class Lorenz63(DiffDynSyst):
 		"""
 			Description
 			-----------
-			Initialisation of parameters of the model and the Apyga.Dynamic.DynamicalSystem class
+			Initialisation of parameters of the model and the CDSK.DynamicalSystem class
 
 			Parameters
 			----------

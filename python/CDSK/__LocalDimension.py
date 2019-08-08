@@ -64,8 +64,8 @@ def localDimension_fit( queue , distXY , q , pareto_fit , theta_fit ):
 
 def localDimension( X , Y = None , metric = "euclidean" , q = 0.98 , n_jobs = 1 , pareto_fit = "mean" , theta_fit = "ferro" , distXY = None ):
 	"""
-		Apyga.dynamic.localDimension
-		============================
+		CDSK.localDimension
+		===================
 
 		Description
 		-----------

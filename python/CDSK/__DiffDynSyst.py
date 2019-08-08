@@ -18,8 +18,8 @@ from .__DynamicalSystem import DynamicalSystem
 
 class DiffDynSyst(DynamicalSystem):
 	"""
-		Apyga.dynamic.continuous.DiffDynSyst
-		====================================
+		CDSK.DiffDynSyst
+		================
 
 		Description
 		-----------

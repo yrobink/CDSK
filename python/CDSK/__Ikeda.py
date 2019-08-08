@@ -14,8 +14,8 @@ from .__DiscDynSyst import DiscDynSyst
 
 class Ikeda(DiscDynSyst):
 	"""
-		Apyga.dynamic.discrete.Ikeda
-		============================
+		CDSK.Ikeda
+		==========
 
 		Description
 		-----------
@@ -25,7 +25,7 @@ class Ikeda(DiscDynSyst):
 		"""
 			Description
 			-----------
-			Initialisation of parameters of the model and the Apyga.Dynamic.DynamicalSystem class
+			Initialisation of parameters of the model and the CDSK.DynamicalSystem class
 
 			Parameters
 			----------

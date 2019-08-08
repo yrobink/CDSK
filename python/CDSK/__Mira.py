@@ -15,8 +15,8 @@ from .__DiscDynSyst import DiscDynSyst
 
 class Mira(DiscDynSyst):
 	"""
-		Apyga.dynamic.discrete.Mira
-		===========================
+		CDSK.Mira
+		=========
 
 		Description
 		-----------
@@ -26,7 +26,7 @@ class Mira(DiscDynSyst):
 		"""
 			Description
 			-----------
-			Initialisation of parameters of the model and the Apyga.Dynamic.DynamicalSystem class
+			Initialisation of parameters of the model and the CDSK.DynamicalSystem class
 
 			Parameters
 			----------

@@ -14,8 +14,8 @@ from .__DiscDynSyst import DiscDynSyst
 
 class Henon(DiscDynSyst):
 	"""
-		Apyga.dynamic.discrete.Henon
-		============================
+		CDSK.Henon
+		==========
 
 		Description
 		-----------
@@ -26,7 +26,7 @@ class Henon(DiscDynSyst):
 		"""
 			Description
 			-----------
-			Initialisation of parameters of the model and the Apyga.Dynamic.DynamicalSystem class
+			Initialisation of parameters of the model and the CDSK.DynamicalSystem class
 
 			Parameters
 			----------

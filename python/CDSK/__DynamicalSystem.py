@@ -15,8 +15,8 @@ import numpy as np
 
 class DynamicalSystem:
 	"""
-		Apyga.dynamic.DynamicalSystem
-		=============================
+		CDSK.DynamicalSystem
+		====================
 
 		Description
 		-----------
@@ -88,7 +88,7 @@ class DynamicalSystem:
 
 	def orbit( self , time , X0 = None ):
 		"""
-			Build an orbit of the dynamical system. If self.size > 1, a snapshot attractor [1] is build.
+			Build an orbit of the dynamical system. If self.size > 1, a snapshot attractor [1] is built.
 
 			Parameters
 			----------

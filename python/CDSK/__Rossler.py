@@ -14,8 +14,8 @@ from .__DiffDynSyst import DiffDynSyst
 
 class Rossler(DiffDynSyst):
 	"""
-		Apyga.dynamic.continuous.Rossler
-		================================
+		CDSK.Rossler
+		============
 
 		Description
 		-----------

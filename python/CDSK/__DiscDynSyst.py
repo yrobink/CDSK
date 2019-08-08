@@ -15,8 +15,8 @@ from .__DynamicalSystem import DynamicalSystem
 
 class DiscDynSyst(DynamicalSystem):
 	"""
-		Apyga.dynamic.discrete.DiscDynSyst
-		==================================
+		CDSK.DiscDynSyst
+		================
 
 		Description
 		-----------
