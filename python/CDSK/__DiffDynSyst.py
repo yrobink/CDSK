@@ -20,17 +20,17 @@ class DiffDynSyst(DynamicalSystem):
 	"""
 		CDSK.DiffDynSyst
 		================
-
+		
 		Description
 		-----------
 		Abstract base class to construct a continuous dynamical system.
 		This class CAN NOT BE USED directly. It requires to be derived.
 	"""
-
+	
 	def __init__( self , dim = 0 , size = 0 , bounds = None ):
 		"""
 			Initialisation of the continuous dynamical system
-
+			
 			Parameters
 			----------
 			dim    : int
@@ -53,7 +53,8 @@ class DiffDynSyst(DynamicalSystem):
 		"""
 		DynamicalSystem.__init__( self , dim , size , bounds )
 		self._edo_solver = "scipy"
-		
+	
+	
 	def _solver( self , X0 , time ):
 		if self._edo_solver == "RK4":
 			solution = np.zeros( (time.size,X0.size) )
