@@ -11,3 +11,4 @@ NAMESPACE
 *.egg-info
 build
 dist
+tests/*.png
