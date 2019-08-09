@@ -29,7 +29,7 @@ class Lorenz63(DiffDynSyst):
 			Description
 			-----------
 			Initialisation of parameters of the model and the CDSK.DynamicalSystem class
-
+			
 			Parameters
 			----------
 			s    : float

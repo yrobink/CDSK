@@ -18,7 +18,7 @@ import SDFC as sd
 ## Class ##
 ###########
 
-def _genpareto_fit( distThX , pareto_fit ):
+def _genpareto_fit( distThX , pareto_fit ):##{{{
 	if pareto_fit == "SDFC":
 		law = sd.GPDLaw()
 		law.fit( distThX , loc = 0 )
@@ -27,15 +27,17 @@ def _genpareto_fit( distThX , pareto_fit ):
 		return sc.genpareto.fit( distThX , floc = 0 )[2]
 	else:
 		return np.mean( distThX )
+##}}}
 
 ## Nicholas Moloney code, original name is extremal_sueveges
-def _theta_sueveges_fit( iThreshold , q ):
+def _theta_sueveges_fit( iThreshold , q ):##{{{
 	Nc = np.count_nonzero( (iThreshold[1:] - iThreshold[:-1] - 1) > 0 )
 	N = iThreshold.size - 1
 	tmp = ( 1.0 - q ) * ( iThreshold[-1] - iThreshold[0] )
 	return ( tmp + N + Nc - np.sqrt( np.power( tmp + N + Nc , 2. ) - 8. * Nc * tmp ) ) / ( 2. * tmp )
+##}}}
 
-def _theta_ferro_fit( iThreshold ):
+def _theta_ferro_fit( iThreshold ):##{{{
 	Ti = iThreshold[1:] - iThreshold[:-1]
 	res = None
 	if np.max(Ti) > 2:
@@ -44,17 +46,20 @@ def _theta_ferro_fit( iThreshold ):
 		res = 2 * ( np.sum(Ti)**2 ) / ( (Ti.size-1) * np.sum( Ti**2 ) )
 	res = min( 1 , res )
 	return res
+##}}}
 
-def _theta_fit( iThreshold , q , theta_fit ):
+def _theta_fit( iThreshold , q , theta_fit ):##{{{
 	if theta_fit == "sueveges":
 		return _theta_sueveges_fit( iThreshold , q )
 	else:
 		return _theta_ferro_fit( iThreshold )
+##}}}
 
-def localDimension_fit( queue , distXY , q , pareto_fit , theta_fit ):
+
+def localDimension_fit( queue , distXY , q , pareto_fit , theta_fit ):##{{{
 	threshold = np.percentile( distXY , 100 * q , axis = 1 )
 	size = threshold.size
-
+	
 	localDim = np.zeros_like( threshold )
 	theta = np.zeros_like( threshold )
 	
@@ -65,6 +70,7 @@ def localDimension_fit( queue , distXY , q , pareto_fit , theta_fit ):
 	
 	queue[0].put( localDim )
 	queue[1].put( theta )
+##}}}
 
 
 def localDimension( X , Y = None , metric = "euclidean" , q = 0.98 , n_jobs = 1 , pareto_fit = "SDFC" , theta_fit = "ferro" , distXY = None ):
@@ -88,7 +94,7 @@ def localDimension( X , Y = None , metric = "euclidean" , q = 0.98 , n_jobs = 1 
 			Quantile used to find the threshold for generalized pareto distribution
 		n_jobs     : int = 1
 			Number of CPU available.
-		pareto_fit : str = "mean"
+		pareto_fit : str = "SDFC"
 			Method to fit the scale of generalized pareto law. Options are : "SDFC" (scale estimation), "scipy" (scale estimation, slower) and "mean" (assume shape = 0).
 		theta_fit  : str = "ferro"
 			Method to fit the theta. "ferro" or "sueveges".
