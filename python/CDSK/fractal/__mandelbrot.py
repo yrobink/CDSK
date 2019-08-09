@@ -34,9 +34,9 @@ class Mandelbrot:
 		Warning : (x,y) or (classic_set,nx [,ny]) must be set!
 		
 		x : np.array or None
-			x points to estimate the mandelbrot set
+			x points to estimate the Mandelbrot set
 		y : np.array or None
-			y points to estimate the mandelbrot set
+			y points to estimate the Mandelbrot set
 		classic_set : str or None
 			Pre defined set, available values are "set0", "set1", "set2", "set3" and "set4"
 		nx          : int or None
@@ -88,7 +88,7 @@ class Mandelbrot:
 	
 	def plot( self , show = False ):
 		"""
-		Plot the mandelbrot set (after run).
+		Plot the Mandelbrot set (after run).
 		
 		Parameters
 		----------
@@ -97,8 +97,8 @@ class Mandelbrot:
 			Call plt.show() or no. Default is False
 		"""
 		X,Y = np.meshgrid( self._x , self._y )
-		sx = min( max( self._ny / 100 , 5 ) , 20 )
-		sy = min( max( self._nx / 100 , 5 ) , 20 )
+		sx = min( max( self._ny / 100 , 5 ) , 10 )
+		sy = min( max( self._nx / 100 , 5 ) , 10 )
 		
 		fig = plt.figure( figsize = (sx,sy) )
 		ax  = fig.add_subplot( 1 , 1 , 1 )

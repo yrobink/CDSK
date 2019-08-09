@@ -4,6 +4,6 @@
 ## Libraries ##
 ###############
 
-from .__julia      import julia
+from .__julia      import Julia
 from .__mandelbrot import Mandelbrot
 
