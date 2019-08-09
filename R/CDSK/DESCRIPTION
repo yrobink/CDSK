@@ -1,0 +1,16 @@
+Package: CDSK
+Type: Package
+Title: What the Package Does in One 'Title Case' Line
+Version: 1.0
+Date: 2019-08-09
+Author: Your Name
+Maintainer: Your Name <your@email.com>
+Description: One paragraph description of what the package does as one
+        or more full sentences.
+License: GPL (>= 2)
+LinkingTo: Rcpp
+Encoding: UTF-8
+LazyData: true
+NeedsCompilation: yes
+Imports: Rcpp, methods, R6, deSolve
+RoxygenNote: 6.1.1
