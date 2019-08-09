@@ -4,7 +4,7 @@
 ## Libraries ##
 ###############
 
-__version__ = "0.1.0"
+__version__ = "0.1.1a0"
 
 ## Abstract class
 from .__DynamicalSystem import DynamicalSystem
