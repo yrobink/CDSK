@@ -165,7 +165,7 @@ setup(
 	author_email = "yoann.robin.k@gmail.com" ,
 	license = "CeCILL-C" ,
 	platforms = [ "linux" , "macosx" ] ,
-	requires = [ "numpy" , "scipy" , "matplotlib" ],
+	requires = [ "numpy" , "scipy" , "matplotlib" , "sklearn" , "SDFC" ],
 #	ext_modules = ext_modules,
 #	install_requires = ['pybind11>=2.2'],
 #	cmdclass = {'build_ext': BuildExt},
