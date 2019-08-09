@@ -11,6 +11,7 @@ import scipy.stats as sc
 import scipy.spatial.distance as ssd
 import sklearn.metrics.pairwise as skmp
 import multiprocessing as mp
+import SDFC as sd
 
 
 ###########
@@ -18,10 +19,14 @@ import multiprocessing as mp
 ###########
 
 def _genpareto_fit( distThX , pareto_fit ):
-	if pareto_fit == "mean":
-		return np.mean( distThX )
-	else:
+	if pareto_fit == "SDFC":
+		law = sd.GPDLaw()
+		law.fit( distThX , loc = 0 )
+		return law.coef_[0]
+	elif pareto_fit == "scipy":
 		return sc.genpareto.fit( distThX , floc = 0 )[2]
+	else:
+		return np.mean( distThX )
 
 ## Nicholas Moloney code, original name is extremal_sueveges
 def _theta_sueveges_fit( iThreshold , q ):
@@ -62,7 +67,7 @@ def localDimension_fit( queue , distXY , q , pareto_fit , theta_fit ):
 	queue[1].put( theta )
 
 
-def localDimension( X , Y = None , metric = "euclidean" , q = 0.98 , n_jobs = 1 , pareto_fit = "mean" , theta_fit = "ferro" , distXY = None ):
+def localDimension( X , Y = None , metric = "euclidean" , q = 0.98 , n_jobs = 1 , pareto_fit = "SDFC" , theta_fit = "ferro" , distXY = None ):
 	"""
 		CDSK.localDimension
 		===================
@@ -84,7 +89,7 @@ def localDimension( X , Y = None , metric = "euclidean" , q = 0.98 , n_jobs = 1 
 		n_jobs     : int = 1
 			Number of CPU available.
 		pareto_fit : str = "mean"
-			Method to fit the scale of generalized pareto law. If "mean", the mean of the extreme is used. Else, scipy.stats.genpareto.fit is used.
+			Method to fit the scale of generalized pareto law. Options are : "SDFC" (scale estimation), "scipy" (scale estimation, slower) and "mean" (assume shape = 0).
 		theta_fit  : str = "ferro"
 			Method to fit the theta. "ferro" or "sueveges".
 		distXY     : None or np.array[ shape = (n_sample,n_sample) ]
