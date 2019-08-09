@@ -160,7 +160,7 @@ list_packages = [
 setup(
 	name = "CDSK" ,
 	description = "Chaotic Dynamical System Kit" ,
-	version = "0.1.0a0" ,
+	version = "0.1.0" ,
 	author = "Yoann Robin" ,
 	author_email = "yoann.robin.k@gmail.com" ,
 	license = "CeCILL-C" ,
