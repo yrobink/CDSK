@@ -27,7 +27,8 @@ except:
 from mpl_toolkits.mplot3d import axes3d
 
 
-import CDSK as sk
+import CDSK as ck
+import CDSK.fractal as ckf
 
 
 ####################
@@ -46,7 +47,7 @@ import CDSK as sk
 def test_lorenz63( plot = True ):##{{{
 	print( "Test Lorenz63..." , end = "\r" )
 	try:
-		l63 = sk.Lorenz63()
+		l63 = ck.Lorenz63()
 		X0  = l63.orbit( np.linspace( 0 , 100 , 100 ) )[-1,:]
 		X   = l63.orbit( np.linspace( 0 , 100 , 10000 ) , X0 = X0 )
 		
@@ -64,7 +65,7 @@ def test_lorenz63( plot = True ):##{{{
 def test_rossler( plot = True ):##{{{
 	print( "Test Rossler..." , end = "\r" )
 	try:
-		ross = sk.Rossler()
+		ross = ck.Rossler()
 		X0  = ross.orbit( np.linspace( 0 , 100 , 100 ) )[-1,:]
 		X   = ross.orbit( np.linspace( 0 , 300 , 10000 ) , X0 = X0 )
 		
@@ -82,7 +83,7 @@ def test_rossler( plot = True ):##{{{
 def test_lorenz84( plot = True ):##{{{
 	print( "Test Lorenz84..." , end = "\r" )
 	try:
-		l63 = sk.Lorenz84( size = 1000 , F = "cyclic" )
+		l63 = ck.Lorenz84( size = 1000 , F = "cyclic" )
 		X0  = l63.orbit( np.linspace( 0 , 2 * 73 , 50 ) )[-1,:,:]
 		X   = l63.orbit( np.linspace( 0 , 5 * 73 , 10000 ) , X0 = X0 )
 		t_fall = int( 4    / 5 * 10000 )
@@ -112,7 +113,7 @@ def test_lorenz84( plot = True ):##{{{
 def test_henon( plot = True ):##{{{
 	print( "Test Henon..." , end = "\r" )
 	try:
-		henon = sk.Henon()
+		henon = ck.Henon()
 		X   = henon.orbit( 10000 , X0 = np.array( [0.5,0.5] ) )
 		
 		if plot:
@@ -129,7 +130,7 @@ def test_henon( plot = True ):##{{{
 def test_ikeda( plot = True ):##{{{
 	print( "Test Ikeda..." , end = "\r" )
 	try:
-		ike = sk.Ikeda()
+		ike = ck.Ikeda()
 		X   = ike.orbit( 10000 , X0 = np.array( [0.5,0.5] ) )
 		
 		if plot:
@@ -146,9 +147,9 @@ def test_ikeda( plot = True ):##{{{
 def test_mira( plot = True ):##{{{
 	print( "Test Mira..." , end = "\r" )
 	try:
-		mir = sk.Mira()
+		mir = ck.Mira()
 		X0  = mir.orbit( 10000 , X0 = np.array( [0.5,0.5] ) )
-		mir = sk.Mira( size = 10000 )
+		mir = ck.Mira( size = 10000 )
 		X   = mir.orbit( 1000 , X0 = X0 )[-1,:,:]
 		
 		if plot:
@@ -162,36 +163,65 @@ def test_mira( plot = True ):##{{{
 		print( "Test Mira (Fail)  " )
 ##}}}
 
-def test_local_dimension( plot = True ):
+
+def test_local_dimension( plot = True ):##{{{
 	print( "Test local dimension..." , end = "\r" )
-#	try:
-	l63 = sk.Lorenz63()
-	X0  = l63.orbit( np.linspace( 0 , 100 , 100 ) )[-1,:]
-	X   = l63.orbit( np.linspace( 0 , 100 , 10000 ) , X0 = X0 )
-	
-	ld0,th0 = sk.localDimension(X[:,1:]    , n_jobs = 6 )
-	ld1,th1 = sk.localDimension(X[:,[0,2]] , n_jobs = 6 )
-	ld2,th2 = sk.localDimension(X[:,:2]    , n_jobs = 6 )
-	print(np.mean(ld0))
-	print(np.mean(ld1))
-	print(np.mean(ld2))
-	vmin,vmax = np.quantile( np.vstack( (ld0,ld1,ld2) ) , [0.1,0.9] )
-	
-	
-	if plot:
-		fig = plt.figure( figsize = (14,7) )
-		ax = fig.add_subplot( 1 , 3 , 1 )
-		ax.scatter( X[:,1] , X[:,2] , s = 2. , c = ld0 , cmap = plt.cm.inferno , vmin = vmin , vmax = vmax )
-		ax = fig.add_subplot( 1 , 3 , 2 )
-		ax.scatter( X[:,0] , X[:,2] , s = 2. , c = ld1 , cmap = plt.cm.inferno , vmin = vmin , vmax = vmax )
-		ax = fig.add_subplot( 1 , 3 , 3 )
-		ax.scatter( X[:,0] , X[:,1] , s = 2. , c = ld2 , cmap = plt.cm.inferno , vmin = vmin , vmax = vmax )
+	try:
+		l63 = ck.Lorenz63()
+		X0  = l63.orbit( np.linspace( 0 , 100 , 100 ) )[-1,:]
+		X   = l63.orbit( np.linspace( 0 , 100 , 10000 ) , X0 = X0 )
 		
-		fig.set_tight_layout(True)
-		plt.show()
-	print( "Test local dimension (Done)  " )
-#	except:
-#		print( "Test local dimension (Fail)  " )
+		ld,th = ck.localDimension( X , n_jobs = 6 , pareto_fit = "SDFC" )
+		vmin_ld,vmax_ld = np.quantile( ld , [0.1,0.9] )
+		vmin_th,vmax_th = np.quantile( th , [0.1,0.9] )
+		
+		
+		if plot:
+			fig = plt.figure( figsize = (14,8) )
+			ax = fig.add_axes( [0.05,0.15,0.45,0.8] , projection = "3d" )
+			im_ld = ax.scatter( X[:,0] , X[:,1] , X[:,2] , s = 2. , c = ld , cmap = plt.cm.inferno , vmin = vmin_ld , vmax = vmax_ld )
+			ax.set_title( "Mean local dimension = {}".format( ld.mean().round(2) ) )
+			ax = fig.add_axes( [0.5,0.15,0.45,0.8] , projection = "3d" )
+			im_th = ax.scatter( X[:,0] , X[:,1] , X[:,2] , s = 2. , c = th , cmap = plt.cm.inferno , vmin = vmin_th , vmax = vmax_th )
+			
+			cax = fig.add_axes( [ 0.12 , 0.1 , 0.3 , 0.05 ] )
+			cbar = plt.colorbar( mappable = im_ld , cax = cax , orientation = "horizontal" )
+			cbar.set_label( "Local dimension" )
+			
+			cax = fig.add_axes( [ 0.57 , 0.1 , 0.3 , 0.05 ] )
+			cbar = plt.colorbar( mappable = im_th , cax = cax , orientation = "horizontal" )
+			cbar.set_label( "Persistence" )
+			
+			plt.show()
+		print( "Test local dimension (Done)  " )
+	except:
+		print( "Test local dimension (Fail)  " )
+##}}}
+
+
+def test_mandelbrot( plot = True ):##{{{
+	print( "Test Mandelbrot..." , end = "\r" )
+	try:
+		m = ckf.Mandelbrot( classic_set = "set0" , nx = 1000 , ny = 1000 )
+		m.run()
+		if plot:
+			m.plot(True)
+		print( "Test Mandelbrot. (Done)" )
+	except:
+		print( "Test Mandelbrot. (Fail)" )
+##}}}
+
+def test_julia( plot = True ):##{{{
+	print( "Test Julia..." , end = "\r" )
+	try:
+		jul = ckf.Julia( classic_set = "set0" , nx = 1000 , ny = 1000 )
+		jul.run()
+		if plot:
+			jul.plot(True)
+		print( "Test Julia. (Done)" )
+	except:
+		print( "Test Julia. (Fail)" )
+##}}}
 
 
 def run_all_tests( plot = False ):##{{{
@@ -201,6 +231,11 @@ def run_all_tests( plot = False ):##{{{
 	test_henon(plot)
 	test_ikeda(plot)
 	test_mira(plot)
+	
+	test_local_dimension(plot)
+	
+	test_mandelbrot(plot)
+	test_julia(plot)
 ##}}}
 
 
@@ -217,11 +252,11 @@ def run_all_tests( plot = False ):##{{{
 if __name__ == "__main__":
 	
 	## Start by print version number
-	print(sk.__version__)
+	print(ck.__version__)
 	
 	## Now tests
-#	run_all_tests()
-	test_local_dimension(True)
+	run_all_tests()
+	 
 	
 	print("Done")
 
