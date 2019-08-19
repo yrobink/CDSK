@@ -78,19 +78,18 @@ DynamicalSystem = R6::R6Class( "DynamicalSystem" ,
 	
 	randomIC = function()
 	{
-		return( as.vector( base::apply( self$bounds , 1 , function(X) { return( stats::runif( n = self$size , min = X[1] , max = X[2] ) ) } ) ) )
+		return( base::apply( self$bounds , 1 , function(X) { return( stats::runif( n = self$size , min = X[1] , max = X[2] ) ) } ) )
 	},
 	
 	orbit = function( t , X0 = NULL )
 	{
 		X0 = if( is.null(X0) ) self$randomIC() else X0
+		X0 = as.vector(base::t(X0))
 		X = private$solver( t , X0 )
-		print(dim(X))
 		if( self$size > 1 )
 		{
-			l = dim(X)[1]
-			X = base::array( X , base::c( dim(X)[1] , self$dim , self$size ) )
-#			X = base::aperm( X , 
+			X  = base::array( X , base::c( dim(X)[1] , self$dim , self$size ) )
+			return( base::aperm( X , base::c( 1 , 3 , 2 ) ) )
 		}
 		return( X )
 	}
