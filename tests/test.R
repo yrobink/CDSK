@@ -314,6 +314,31 @@ test_local_dimension = function( plot = FALSE )##{{{
 ##}}}
 
 
+test_mandelbrot = function( plot = FALSE )##{{{
+{
+	m = Mandelbrot$new( classic_set = "set0" , nx = 200 , ny = 200 )
+	m$run()
+	
+	if( plot )
+	{
+		m$plot()
+	}
+}
+##}}}
+
+test_julia = function( plot = FALSE )##{{{
+{
+	m = Julia$new( classic_set = "set2" , nx = 200 , ny = 200 )
+	m$run()
+	
+	if( plot )
+	{
+		m$plot()
+	}
+}
+##}}}
+
+
 run_all_tests = function( plot = FALSE )##{{{
 {
 	
@@ -326,6 +351,9 @@ run_all_tests = function( plot = FALSE )##{{{
 	test_henon( plot )
 	
 	test_local_dimension( plot )
+	
+	test_mandelbrot( plot )
+	test_julia( plot )
 }
 ##}}}
 
@@ -337,6 +365,7 @@ run_all_tests = function( plot = FALSE )##{{{
 
 #run_all_tests(TRUE)
 
+test_julia(TRUE)
 
 
 base::cat("Done\n")
