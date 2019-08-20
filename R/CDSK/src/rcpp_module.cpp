@@ -90,9 +90,6 @@
 #include <functional>
 #include <algorithm>
 
-namespace CDSK
-{
-
 #include "Pairwise_distances.hpp"
 
 
@@ -101,5 +98,4 @@ RCPP_MODULE(yada){
 	Rcpp::function( "cpp_pairwise_distances_Xstr"   , &cpp_pairwise_distances_Xstr , "" ) ;
 	Rcpp::function( "cpp_pairwise_distances_XYCall" , &cpp_pairwise_distances_XYCall , "" ) ;
 	Rcpp::function( "cpp_pairwise_distances_XCall"  , &cpp_pairwise_distances_XCall , "" ) ;
-}
 }
