@@ -242,7 +242,7 @@ list_packages = [
 setup(
 	name = "CDSK" ,
 	description = "Chaotic Dynamical System Kit" ,
-	version = "0.1.1" ,
+	version = "0.1.2a0" ,
 	author = "Yoann Robin" ,
 	author_email = "yoann.robin.k@gmail.com" ,
 	license = "CeCILL-C" ,
