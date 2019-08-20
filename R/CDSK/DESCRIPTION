@@ -6,9 +6,9 @@ Date: 2019-08-09
 Authors@R: person("Yoann", "Robin", email = "yoann.robin.k@gmail.com", role = c("aut", "cre"))
 Description: Generation of chaotic attractor and fit local dimension
 License: GPL (>= 2)
-LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
 Imports: Rcpp, methods, R6, deSolve
+LinkingTo: Rcpp
 RoxygenNote: 6.1.1
