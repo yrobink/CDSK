@@ -33,7 +33,7 @@
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{new(s,r,b,size)}}{This method is used to create object of this class with \code{Henon}}
+#'   \item{\code{new(a,b,size)}}{This method is used to create object of this class with \code{Henon}}
 #'   \item{\code{orbit(t,X0)}}{Compute the orbit along t starting at X0. If X0 is NULL, it is randomly drawn by randomIC()}
 #'   \item{\code{randomIC()}}{Return a random initial condition}
 #' }

@@ -38,7 +38,7 @@
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{new(x,y,classic_set,nx,ny,maxit)}}{This method is used to create object of this class with \code{Julia}}
+#'   \item{\code{new(c,x,y,classic_set,nx,ny,maxit)}}{This method is used to create object of this class with \code{Julia}}
 #'   \item{\code{run()}}{Estimate the ratio of the Julia set}
 #'   \item{\code{plot()}}{Plot}
 #' }
