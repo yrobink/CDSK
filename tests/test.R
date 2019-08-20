@@ -12,7 +12,6 @@ base::rm( list = base::ls() )
 
 library(devtools)
 load_all( "../R/CDSK" )
-library(deSolve)
 library(plot3D)
 
 
@@ -211,6 +210,7 @@ run_all_tests = function( plot = FALSE )##{{{
 	test_lorenz63( plot )
 	test_rossler( plot )
 	test_lorenz84( plot )
+	test_local_dimension( plot )
 }
 ##}}}
 
@@ -220,9 +220,7 @@ run_all_tests = function( plot = FALSE )##{{{
 ## main ##
 ##########
 
-#run_all_tests(FALSE)
-
-test_local_dimension(TRUE)
+#run_all_tests(TRUE)
 
 
 
