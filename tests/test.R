@@ -97,6 +97,7 @@ base::rm( list = base::ls() )
 
 library(devtools)
 load_all( "../R/CDSK" )
+#library(CDSK)
 library(plot3D)
 
 
