@@ -173,6 +173,116 @@ test_lorenz84 = function( plot = FALSE )##{{{
 }
 ##}}}
 
+
+test_henon = function( plot = FALSE )##{{{
+{
+	size = 1000
+	henon = Henon$new( size = size )
+	t = 1000
+	X = henon$orbit(t)
+	
+	if( plot )
+	{
+		grDevices::dev.new()
+		graphics::par( mfrow = base::c( 2 , 2 ) )
+		
+		## Plot0
+		snap = 1
+		orb  = 1:size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Initial snapshot" )
+		
+		## Plot1
+		snap = t
+		orb  = 1:size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Final snapshot" )
+		
+		## Plot3
+		snap = 1:t
+		orb  = 1
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "One orbit" )
+		
+		## Plot4
+		snap = 1:t
+		orb  = size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Another orbit" )
+		
+	}
+}
+##}}}
+
+test_ikeda = function( plot = FALSE )##{{{
+{
+	size = 1000
+	ike = Ikeda$new( size = size )
+	t = 1000
+	X = ike$orbit(t)
+	
+	if( plot )
+	{
+		grDevices::dev.new()
+		graphics::par( mfrow = base::c( 2 , 2 ) )
+		
+		## Plot0
+		snap = 1
+		orb  = 1:size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Initial snapshot" )
+		
+		## Plot1
+		snap = t
+		orb  = 1:size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Final snapshot" )
+		
+		## Plot3
+		snap = 1:t
+		orb  = 1
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "One orbit" )
+		
+		## Plot4
+		snap = 1:t
+		orb  = size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Another orbit" )
+		
+	}
+}
+##}}}
+
+test_mira = function( plot = FALSE )##{{{
+{
+	size = 1000
+	mira = Mira$new( size = size )
+	t = 1000
+	X = mira$orbit(t)
+	
+	if( plot )
+	{
+		grDevices::dev.new()
+		graphics::par( mfrow = base::c( 2 , 2 ) )
+		
+		## Plot0
+		snap = 1
+		orb  = 1:size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Initial snapshot" )
+		
+		## Plot1
+		snap = t
+		orb  = 1:size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Final snapshot" )
+		
+		## Plot3
+		snap = 1:t
+		orb  = 1
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "One orbit" )
+		
+		## Plot4
+		snap = 1:t
+		orb  = size
+		graphics::plot( X[snap,orb,1] , X[snap,orb,2] , col = "red" , main = "Another orbit" )
+		
+	}
+}
+##}}}
+
+
 test_local_dimension = function( plot = FALSE )##{{{
 {
 	## generate a long orbit
@@ -210,6 +320,11 @@ run_all_tests = function( plot = FALSE )##{{{
 	test_lorenz63( plot )
 	test_rossler( plot )
 	test_lorenz84( plot )
+	
+	test_ikeda( plot )
+	test_mira( plot )
+	test_henon( plot )
+	
 	test_local_dimension( plot )
 }
 ##}}}
@@ -221,7 +336,6 @@ run_all_tests = function( plot = FALSE )##{{{
 ##########
 
 #run_all_tests(TRUE)
-
 
 
 
