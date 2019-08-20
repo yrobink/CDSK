@@ -1,12 +1,10 @@
 Package: CDSK
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Generation of chaotic attractor and fit local dimension
 Version: 1.0
 Date: 2019-08-09
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one
-        or more full sentences.
+Authors@R: person("Yoann", "Robin", email = "yoann.robin.k@gmail.com", role = c("aut", "cre"))
+Description: Generation of chaotic attractor and fit local dimension
 License: GPL (>= 2)
 LinkingTo: Rcpp
 Encoding: UTF-8

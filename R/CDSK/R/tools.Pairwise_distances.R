@@ -2,14 +2,14 @@
 ##################################################################################
 ##################################################################################
 ##                                                                              ##
-## Copyright Yoann Robin, 2018                                                  ##
+## Copyright Yoann Robin, 2019                                                  ##
 ##                                                                              ##
 ## yoann.robin.k@gmail.com                                                      ##
 ##                                                                              ##
-## This software is a computer program that is part of the CDSK library. This  ##
-## library makes it possible to study dynamic systems and to statistically      ##
-## correct uni / multivariate data by applying optimal transport to             ##
-## sparse histograms.                                                           ##
+## This software is a computer program that is part of the CDSK (Chaotic        ##
+## Dynamical System Kit) library. This library makes it possible                ##
+## to generate classic (continuous and discrete) attractors, generate the       ##
+## Mandelbrot and Julia set, and fit the local dimension.                       ##
 ##                                                                              ##
 ## This software is governed by the CeCILL-C license under French law and       ##
 ## abiding by the rules of distribution of free software.  You can  use,        ##
@@ -43,14 +43,14 @@
 ##################################################################################
 ##################################################################################
 ##                                                                              ##
-## Copyright Yoann Robin, 2018                                                  ##
+## Copyright Yoann Robin, 2019                                                  ##
 ##                                                                              ##
 ## yoann.robin.k@gmail.com                                                      ##
 ##                                                                              ##
 ## Ce logiciel est un programme informatique faisant partie de la librairie     ##
-## CDSK. Cette librairie permet d'étudier les systèmes dynamique et de         ##
-## corriger statistiquement des données en uni/multivarié en appliquant le      ##
-## transport optimal à des histogrammes creux.                                  ##
+## CDSK (Chaotic Dynamical System Kit). Cette librairie permet de générer les   ##
+## attracteurs classiques (discret comme continue), de générer l'ensemble de    ##
+## Julia et de Mandelbrot et d'estimer les dimensions locales.                  ##
 ##                                                                              ##
 ## Ce logiciel est régi par la licence CeCILL-C soumise au droit français et    ##
 ## respectant les principes de diffusion des logiciels libres. Vous pouvez      ##

@@ -4,7 +4,7 @@
 #' cpp_pairwise_distances_XYstr
 #' 
 #' Pairwise distances between two differents matrix X and Y with a 
-#' compiled str_metric. DO NOT USE, use ARyga::pairwise_distances
+#' compiled str_metric. DO NOT USE, use CDSK::pairwise_distances
 #'
 #' @usage cpp_pairwise_distances_XYstr(X,Y,str_metric)
 #' @param X [Rcpp::NumericMatrix] Matrix
@@ -19,7 +19,7 @@ cpp_pairwise_distances_XYstr <- function(X, Y, str_metric) {
 #' cpp_pairwise_distances_Xstr
 #' 
 #' Pairwise distances between X and themselves with a compiled 
-#' str_metric. DO NOT USE, use ARyga::pairwise_distances
+#' str_metric. DO NOT USE, use CDSK::pairwise_distances
 #'
 #' @usage cpp_pairwise_distances_Xstr(X,str_metric)
 #' @param X [Rcpp::NumericMatrix] Matrix
@@ -33,7 +33,7 @@ cpp_pairwise_distances_Xstr <- function(X, str_metric) {
 #' cpp_pairwise_distances_XYCall
 #' 
 #' Pairwise distances between X  and Y with a R function (metric).
-#' DO NOT USE, use ARyga::pairwise_distances
+#' DO NOT USE, use CDSK::pairwise_distances
 #'
 #' @usage cpp_pairwise_distances_XYCall(X,Y,metric)
 #' @param X [Rcpp::NumericMatrix] Matrix
@@ -48,7 +48,7 @@ cpp_pairwise_distances_XYCall <- function(X, Y, metric) {
 #' cpp_pairwise_distances_XCall
 #' 
 #' Pairwise distances between X and themselves with a R function (metric).
-#' DO NOT USE, use ARyga::pairwise_distances
+#' DO NOT USE, use CDSK::pairwise_distances
 #'
 #' @usage cpp_pairwise_distances_XCall(X,metric)
 #' @param X [Rcpp::NumericMatrix] Matrix
