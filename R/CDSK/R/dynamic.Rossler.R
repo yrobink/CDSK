@@ -44,9 +44,9 @@
 #' ross = CDSK::Rossler$new( size = 200 )
 #' t = base::seq( 0 , 100 , 0.005 )
 #' X = ross$orbit(t) 
-#' ## X is an array with dim = (length(t),3,200)
-#' ## Each X[i,,] is an orbit
-#' ## Each X[,,i] is a snapshot
+#' ## X is an array with dim = (length(t),200,3)
+#' ## Each X[,i,] is an orbit
+#' ## Each X[i,,] is a snapshot
 #'
 #' @export
 Rossler = R6::R6Class( "Rossler" ,
