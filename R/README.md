@@ -6,6 +6,20 @@
 - Generation of Mandelbrot and Julia set
 - Estimation of Local Dimension and persistence
 
+## Installation
+
+The file *build.R* can be used to compile and install CDSK. For almost all users, it is sufficient to launch:
+
+~~~~
+Rscript build.R -v -c -i
+~~~~
+
+Available options are:
+- *-v* or *--verbose*
+- *-c* or *--check* to launch a check of CDSK before installation
+- *-i* or *--install* to install
+- *-nb* or *--not-build*, for developpers
+
 
 ## License
 
