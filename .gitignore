@@ -13,4 +13,4 @@ NAMESPACE
 build
 dist
 tests/*.png
-
+R/CDSK_*.tar.gz
