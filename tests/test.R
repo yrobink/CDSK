@@ -451,5 +451,4 @@ run_all_tests = function( plot = FALSE )##{{{
 
 run_all_tests(TRUE)
 
-
 base::cat("Done\n")
