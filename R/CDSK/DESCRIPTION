@@ -5,7 +5,7 @@ Version: 1.1
 Date: 2019-08-09
 Authors@R: person("Yoann", "Robin", email = "yoann.robin.k@gmail.com", role = c("aut", "cre"))
 Description: Generation of chaotic attractor and fit local dimension
-License: GPL (>= 2)
+License: CeCILL-C
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
