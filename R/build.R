@@ -86,7 +86,7 @@ if( install )
 	}
 	if( cdsk == "" )
 	{
-		cat( "Error, CDSK not build, so can not be install" )
+		cat( "Error, CDSK not built, so can not be installed" )
 	}
 	else
 	{
