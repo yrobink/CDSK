@@ -1,6 +1,6 @@
 Package: CDSK
 Type: Package
-Title: Generation of chaotic attractor and fit local dimension
+Title: Chaotic Dynamical System Kit
 Version: 1.2
 Date: 2019-08-09
 Authors@R: person("Yoann", "Robin", email = "yoann.robin.k@gmail.com", role = c("aut", "cre"))
