@@ -523,7 +523,28 @@ run_all_tests = function( plot = FALSE )##{{{
 ## main ##
 ##########
 
-run_all_tests(TRUE)
+## Read command line arguments and run (or not) tests
+##================================================{{{
+
+args = commandArgs( trailingOnly = TRUE )
+args_verbose = FALSE
+args_run     = FALSE
+if( length(args) > 0 )
+{
+	for( a in args )
+	{
+		if( a == "-r" || a == "--run-all-tests" )
+			args_run = TRUE
+		if( a == "-v" || a == "--verbose" )
+			args_verbose = TRUE
+	}
+}
+
+if( args_run )
+	run_all_tests(args_verbose)
+
+##}}}
+
 plt$wait()
 
 base::cat("Done\n")
