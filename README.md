@@ -1,5 +1,7 @@
 # CDSK (Chaotic Dynamical System Kit)
 
+## TODO
+- Add references
 
 ## Features
 - python3 and R version
