@@ -10,7 +10,7 @@
 - Estimation of Local Dimension and persistence
 
 ## Note
-CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package.
+CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package. Use experimental branch.
 
 ## License
 
