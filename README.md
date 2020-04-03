@@ -7,6 +7,8 @@
 - Generation of Mandelbrot and Julia set
 - Estimation of Local Dimension and persistence
 
+## Note
+CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package. Use master branch.
 
 ## License
 
