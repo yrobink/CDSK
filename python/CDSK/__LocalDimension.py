@@ -103,8 +103,8 @@ import SDFC as sd
 
 def _genpareto_fit( distThX , pareto_fit ):##{{{
 	if pareto_fit == "SDFC":
-		law = sd.GPDLaw()
-		law.fit( distThX , loc = 0 )
+		law = sd.GPD()
+		law.fit( distThX , f_loc = 0 )
 		return law.coef_[0]
 	elif pareto_fit == "scipy":
 		return sc.genpareto.fit( distThX , floc = 0 )[2]

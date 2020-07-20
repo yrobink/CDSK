@@ -90,7 +90,7 @@
 #include <functional>
 #include <algorithm>
 
-#include "Pairwise_distances.hpp"
+#include "Pairwise_distances.h"
 
 
 RCPP_MODULE(yada){

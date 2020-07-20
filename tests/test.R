@@ -101,6 +101,78 @@ load_all( "../R/CDSK" )
 library(plot3D)
 
 
+################
+## Plot tools ##
+################
+
+PlotTools = R6::R6Class( "PlotTools" , ##{{{
+	
+	
+	public = list(
+	
+	###############
+	## Arguments ##
+	###############
+	
+	os = NULL,
+	
+	
+	#################
+	## Constructor ##
+	#################
+	
+	initialize = function()
+	{
+		self$os = self$get_os()
+	},
+	
+	
+	#############
+	## Methods ##
+	#############
+	
+	get_os = function()
+	{
+		sysinf = base::Sys.info()
+		if( !is.null(sysinf) )
+		{
+			os = sysinf['sysname']
+			if( os == 'Darwin' ) os = "osx"
+		}
+		else
+		{
+			## mystery machine
+			os = .Platform$OS.type
+			if( base::grepl( "^darwin"   , R.version$os ) ) os = "osx"
+			if( base::grepl( "linux-gnu" , R.version$os ) ) os = "linux"
+		}
+		invisible(tolower(os))
+	},
+	
+	new_screen = function()
+	{
+		if( self$os == "osx" )
+		{
+			grDevices::quartz()
+		}
+		if( self$os == "linux" )
+		{
+			grDevices::X11()
+		}
+	},
+	
+	wait = function()
+	{
+		while( base::names(grDevices::dev.cur()) !='null device' ) base::Sys.sleep(1)
+	}
+	
+	)
+)
+##}}}
+
+plt = PlotTools$new()
+
+
 ###############
 ## Functions ##
 ###############
@@ -162,7 +234,7 @@ test_lorenz63 = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 2 , 2 ) )
 		
 		## Plot0
@@ -198,7 +270,7 @@ test_rossler = function( plot = FALSE )##{{{
 	if( plot )
 	{
 		
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 2 , 2 ) )
 		
 		## Plot0
@@ -233,7 +305,7 @@ test_lorenz84 = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 2 , 2 ) )
 		
 		## Plot0
@@ -269,7 +341,7 @@ test_henon = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 2 , 2 ) )
 		
 		## Plot0
@@ -305,7 +377,7 @@ test_ikeda = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 2 , 2 ) )
 		
 		## Plot0
@@ -341,7 +413,7 @@ test_mira = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 2 , 2 ) )
 		
 		## Plot0
@@ -387,7 +459,7 @@ test_local_dimension = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
-		grDevices::dev.new()
+		plt$new_screen()
 		graphics::par( mfrow = base::c( 1 , 2 ) )
 		
 		## Plot0
@@ -407,6 +479,7 @@ test_mandelbrot = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
+		plt$new_screen()
 		m$plot()
 	}
 }
@@ -419,6 +492,7 @@ test_julia = function( plot = FALSE )##{{{
 	
 	if( plot )
 	{
+		plt$new_screen()
 		m$plot()
 	}
 }
@@ -449,6 +523,28 @@ run_all_tests = function( plot = FALSE )##{{{
 ## main ##
 ##########
 
-run_all_tests(TRUE)
+## Read command line arguments and run (or not) tests
+##================================================{{{
+
+args = commandArgs( trailingOnly = TRUE )
+args_verbose = FALSE
+args_run     = FALSE
+if( length(args) > 0 )
+{
+	for( a in args )
+	{
+		if( a == "-r" || a == "--run-all-tests" )
+			args_run = TRUE
+		if( a == "-v" || a == "--verbose" )
+			args_verbose = TRUE
+	}
+}
+
+if( args_run )
+	run_all_tests(args_verbose)
+
+##}}}
+
+plt$wait()
 
 base::cat("Done\n")

@@ -1,5 +1,7 @@
 # CDSK (Chaotic Dynamical System Kit)
 
+## TODO
+- Add references
 
 ## Features
 - python3 and R version
@@ -8,7 +10,7 @@
 - Estimation of Local Dimension and persistence
 
 ## Note
-CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package. Use master branch.
+CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package.
 
 ## License
 

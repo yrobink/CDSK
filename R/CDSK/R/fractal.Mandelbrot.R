@@ -114,6 +114,8 @@
 #'        Numbers of step in y-axis
 #' @param maxit [integer]
 #'        Number of iterations to estimate the Mandelbrot set
+#' @param new_device [bool]
+#'        boolean indicating if grDevices::dev.new() need to be called
 #'
 #' @return Object of \code{\link{R6Class}}
 #' @format \code{\link{R6Class}} object.
@@ -196,9 +198,10 @@ Mandelbrot = R6::R6Class( "Mandelbrot" ,
 		self$ratio = matrix( ratio , nrow = private$nx , ncol = private$ny ) / private$maxit
 	},
 	
-	plot = function()
+	plot = function( new_device = FALSE )
 	{
-		grDevices::dev.new()
+		if(new_device)
+			grDevices::dev.new()
 		graphics::image( self$ratio , col = base::rev(heat.colors(12)) )
 	}
 	
