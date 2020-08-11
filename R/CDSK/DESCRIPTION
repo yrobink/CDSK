@@ -11,4 +11,4 @@ LazyData: true
 NeedsCompilation: yes
 Imports: Rcpp, methods, R6, deSolve
 LinkingTo: Rcpp
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
