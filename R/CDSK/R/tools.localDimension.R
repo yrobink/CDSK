@@ -106,7 +106,7 @@
 #'
 #' @param q [float] Threshold, default = 0.98
 #'
-#' @param distXY [matrix] -log of pairwise distances between X and Y. If NULL, computed with CDSK::pairwise_distances( X , Y , metric = "logeuclidean" )
+#' @param distXY [matrix] -log of pairwise distances between X and Y. If NULL, computed with pmetric::pairwise_distances( X , Y , metric = "logeuclidean" )
 #'
 #' @param gpd_fit [NULL or function] Function which fit the scale parameter of a gpd distribution, take a vector containing in fist index the threshold, and other values the dataset, and return the scale. If NULL, mean inverse is used.
 #'
@@ -155,7 +155,7 @@ localDimension = function( X , Y = NULL , q = 0.98 , distXY = NULL , gpd_fit = N
 	## Pairwise distances
 	if( is.null(distXY) )
 	{
-		distXY = - CDSK::pairwise_distances( X , Y , metric = "logeuclidean" )
+		distXY = - pmetric::pairwise_distances( X , Y , metric = "logeuclidean" )
 		distXY[which( is.infinite(distXY) )] = - Inf
 	}
 	

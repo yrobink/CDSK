@@ -8,7 +8,5 @@ Description: Generation of chaotic attractor and fit local dimension
 License: CeCILL-C
 Encoding: UTF-8
 LazyData: true
-NeedsCompilation: yes
-Imports: Rcpp, methods, R6, deSolve
-LinkingTo: Rcpp
+Imports: R6, deSolve, pmetric
 RoxygenNote: 7.1.1

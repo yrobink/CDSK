@@ -85,13 +85,9 @@
 #' CDSK
 #'
 #' Chaotic Dynamical System Kit
-#' 
-#' @details This library makes it possible to generate classic (continuous and discrete) attractors, generate the Mandelbrot and Julia set, and fit the local dimension.
+#'
 #' @docType package
 #' @author Yoann Robin Maintainer: Yoann Robin <yoann.robin.k@gmail.com>
-#' @import Rcpp
-#' @importFrom Rcpp evalCpp sourceCpp loadModule
-#' @useDynLib CDSK
-#'
-#' @export
+#' @name CDSK
 NULL
+
