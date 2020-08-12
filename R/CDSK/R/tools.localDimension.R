@@ -100,15 +100,18 @@
 #'
 #' @importFrom stats quantile
 #'
-#' @param X [matrix] A first matrix (time in row, variables in columns). Point where you want the local dimension and persistance
-#'
-#' @param Y [matrix] A second matrix (time in row, variables in columns). Point to estimate ld and theta. If Y = NULL, X is used
-#'
+#' @param X [matrix] A first matrix  (samples in row, features in columns).
+#'        Point where you want the local dimension and persistance
+#' @param Y [matrix] A second matrix (samples in row, features in columns).
+#'        Point to estimate ld and theta. If Y = NULL, X is used
 #' @param q [float] Threshold, default = 0.98
-#'
-#' @param distXY [matrix] -log of pairwise distances between X and Y. If NULL, computed with pmetric::pairwise_distances( X , Y , metric = "logeuclidean" )
-#'
-#' @param gpd_fit [NULL or function] Function which fit the scale parameter of a gpd distribution, take a vector containing in fist index the threshold, and other values the dataset, and return the scale. If NULL, mean inverse is used.
+#' @param distXY [matrix] -log of pairwise distances between X and Y. If NULL,
+#'        computed with 
+#'        pmetric::pairwise_distances( X , Y , metric = "logeuclidean" )
+#' @param gpd_fit [NULL or function] Function which fit the scale parameter of a
+#'        gpd distribution, take a vector containing in fist index the 
+#'        threshold, and other values the dataset, and return the scale. If
+#'        NULL, mean inverse is used.
 #'
 #' @return ld,theta [list] list containing local dimension and theta
 #'
