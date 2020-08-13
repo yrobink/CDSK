@@ -4,7 +4,13 @@ Title: Chaotic Dynamical System Kit
 Version: 2.0
 Date: 2019-08-09
 Authors@R: person("Yoann", "Robin", email = "yoann.robin.k@gmail.com", role = c("aut", "cre"))
-Description: Generation of chaotic attractor and fit local dimension.
+Description: Generation of chaotic attractor and fit local dimension. An
+             extensible interface for continuous and discrete dynamical system
+             is proposed. Orbits and snapshot of attractors can be computed,
+             with a support for time dependent dynamical system. Classic chaotic
+             attractors are proposed: Lorenz base, Rossler, Henon, etc.
+             Furthermore, a code to compute local dimension and persistance of
+             a dynamical system is proposed.
 License: CeCILL-2
 Encoding: UTF-8
 LazyData: true
