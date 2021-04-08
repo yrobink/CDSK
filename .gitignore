@@ -14,3 +14,5 @@ dist
 tests/*.png
 R/CDSK_*.tar.gz
 R/*.Rcheck
+examples/*.nc
+examples/*.png
