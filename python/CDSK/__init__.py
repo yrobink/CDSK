@@ -89,7 +89,7 @@
 ## Libraries ##
 ###############
 
-__version__ = "0.2.0a0"
+__version__ = "0.2.0a1"
 
 ## Abstract class
 from .__DynamicalSystem import DynamicalSystem
