@@ -101,10 +101,14 @@ import SDFC as sd
 ###############
 
 def _theta_sueveges( idx , ql ):##{{{
-	N   = idx.size - 1
-	Nc  = np.sum( idx[1:] - idx[:-1] - 1 > 0 )
-	T   = ( 1. - ql ) * ( idx[-1] - idx[0] )
-	return ( T + N + Nc - np.sqrt( np.power( T + N + Nc , 2. ) - 8. * Nc * T ) ) / ( 2. * T )
+	q = 1 - ql
+	Ti = idx[1:] - idx[:-1]
+	Si = Ti - 1
+	Nc = np.sum(Si > 0)
+	K  = np.sum( q * Si )
+	N  = Ti.size
+	return ( K + N + Nc - np.sqrt( (K + N + Nc)**2 - 8 * Nc * K ) ) / (2 * K)
+
 ##}}}
 
 def _theta_ferro( idx ): ##{{{
@@ -171,8 +175,8 @@ def _local_dimension( dist , q , where , ld_fit , n_jobs ):##{{{
 
 def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_fit = "sueveges" , n_jobs = os.cpu_count() , **kwargs ):##{{{
 	"""
-	CDSK.localDimension
-	===================
+	CDSK.dynamical_local_indexes
+	============================
 	
 	Description
 	-----------
@@ -225,6 +229,8 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 	[1] Messori. G. and Faranda, D. (2021) Technical note: Characterising and
 	comparing different palaeoclimates with dynamical systems theory.
 	Clim. Past, 17, 545–563. doi:https://doi.org/10.5194/cp-17-545-2021.
+	[2] Süveges, Mária. 2007. Likelihood estimation of the extremal index.
+	Extremes, 10.1-2, 41-55, doi:10.1007/s10687-007-0034-2
 	"""
 	
 	## Read kwargs
@@ -272,7 +278,7 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 		for k in range(n_sampleX):
 			idx = np.argwhere(where[k,:,i,j]).squeeze()
 			if theta_fit == "ferro":
-				theta[k,i,j] = _theta_ferro( idx , ql )
+				theta[k,i,j] = _theta_ferro( idx )
 			else:
 				theta[k,i,j] = _theta_sueveges( idx , ql )
 	
