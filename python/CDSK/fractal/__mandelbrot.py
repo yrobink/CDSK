@@ -92,11 +92,7 @@
 import numpy as np
 import itertools as itt
 import matplotlib as mpl
-try:
-	import matplotlib.pyplot as plt
-except:
-	mpl.use("Qt5Agg")
-	import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 ###############

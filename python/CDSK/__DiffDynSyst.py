@@ -101,38 +101,38 @@ from .__DynamicalSystem import DynamicalSystem
 
 class DiffDynSyst(DynamicalSystem):
 	"""
-		CDSK.DiffDynSyst
-		================
-		
-		Description
-		-----------
-		Abstract base class to construct a continuous dynamical system.
-		This class CAN NOT BE USED directly. It requires to be derived.
+	CDSK.DiffDynSyst
+	================
+	
+	Description
+	-----------
+	Abstract base class to construct a continuous dynamical system.
+	This class CAN NOT BE USED directly. It requires to be derived.
 	"""
 	
 	def __init__( self , dim = 0 , size = 0 , bounds = None ):
 		"""
-			Initialisation of the continuous dynamical system
-			
-			Parameters
-			----------
-			dim    : int
-			   Dimension of the phase space.
-			size   : int
-			   Numbers of initial condition simultaneously computed by the dynamical system
-			bounds : np.array[ shape = (2,dim) ]
-			   Bounds of a box in phase space where initial condition can be drawn.
-					=> bounds[0,:] is the lower bound
-					=> bounds[1,:] is the upper bound
-			
-			Attributes
-			----------
-			dim    : int
-			   Dimension of the phase space.
-			size   : int
-			   Numbers of initial condition simultaneously computed by the dynamical system
-			bounds : np.array[ shape = (2,dim) ]
-			   Bounds of a box in phase space where initial condition can be drawn.
+		Initialisation of the continuous dynamical system
+		
+		Parameters
+		----------
+		dim    : int
+		   Dimension of the phase space.
+		size   : int
+		   Numbers of initial condition simultaneously computed by the dynamical system
+		bounds : np.array[ shape = (2,dim) ]
+		   Bounds of a box in phase space where initial condition can be drawn.
+				=> bounds[0,:] is the lower bound
+				=> bounds[1,:] is the upper bound
+		
+		Attributes
+		----------
+		dim    : int
+		   Dimension of the phase space.
+		size   : int
+		   Numbers of initial condition simultaneously computed by the dynamical system
+		bounds : np.array[ shape = (2,dim) ]
+		   Bounds of a box in phase space where initial condition can be drawn.
 		"""
 		DynamicalSystem.__init__( self , dim , size , bounds )
 		self._edo_solver = "scipy"

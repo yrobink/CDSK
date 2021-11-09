@@ -98,32 +98,32 @@ from .__DiscDynSyst import DiscDynSyst
 
 class Mira(DiscDynSyst):
 	"""
-		CDSK.Mira
-		=========
-
-		Description
-		-----------
-		Ikeda attractor.
+	CDSK.Mira
+	=========
+	
+	Description
+	-----------
+	Ikeda attractor.
 	"""
 	def __init__( self , a = -0.48 , b = 0.93 , size = 1 ):
 		"""
-			Description
-			-----------
-			Initialisation of parameters of the model and the CDSK.DynamicalSystem class
-
-			Parameters
-			----------
-			a    : float
-			   Default = -0.48
-			b    : float
-			   Default = 0.93
-			size : int
-			   Numbers of orbits must be computed
-
-			Fix initializations
-			-------------------
-			dim    : Initialized at 2
-			bounds : Initialized at np.array([ [ 3.8 , -0.2 ] , [ 4.2 , 0.2 ] ])
+		Description
+		-----------
+		Initialisation of parameters of the model and the CDSK.DynamicalSystem class
+		
+		Parameters
+		----------
+		a    : float
+		   Default = -0.48
+		b    : float
+		   Default = 0.93
+		size : int
+		   Numbers of orbits must be computed
+		
+		Fix initializations
+		-------------------
+		dim    : Initialized at 2
+		bounds : Initialized at np.array([ [ 3.8 , -0.2 ] , [ 4.2 , 0.2 ] ])
 		"""
 		DiscDynSyst.__init__( self , 2 , size , np.array([ [ 3.8 , -0.2 ] , [ 4.2 , 0.2 ] ]) )
 		self.a = a

@@ -98,38 +98,38 @@ import numpy as np
 
 class DynamicalSystem:
 	"""
-		CDSK.DynamicalSystem
-		====================
-
-		Description
-		-----------
-		Abstract base class to construct a dynamical system.
-		This class CAN NOT BE USED directly. It requires to be derived.
+	CDSK.DynamicalSystem
+	====================
+	
+	Description
+	-----------
+	Abstract base class to construct a dynamical system.
+	This class CAN NOT BE USED directly. It requires to be derived.
 	"""
 
 	def __init__( self , dim = 0 , size = 0 , bounds = None ):
 		"""
-			Initialisation of the dynamical system
-
-			Parameters
-			----------
-			dim    : int
-			   Dimension of the phase space.
-			size   : int
-			   Numbers of initial condition simultaneously computed by the dynamical system
-			bounds : np.array[ shape = (2,dim) ]
-			   Bounds of a box in phase space where initial condition can be drawn.
-					=> bounds[0,:] is the lower bound
-					=> bounds[1,:] is the upper bound
-			
-			Attributes
-			----------
-			dim    : int
-			   Dimension of the phase space.
-			size   : int
-			   Numbers of initial condition simultaneously computed by the dynamical system
-			bounds : np.array[ shape = (2,dim) ]
-			   Bounds of a box in phase space where initial condition can be drawn.
+		Initialisation of the dynamical system
+		
+		Parameters
+		----------
+		dim    : int
+		   Dimension of the phase space.
+		size   : int
+		   Numbers of initial condition simultaneously computed by the dynamical system
+		bounds : np.array[ shape = (2,dim) ]
+		   Bounds of a box in phase space where initial condition can be drawn.
+				=> bounds[0,:] is the lower bound
+				=> bounds[1,:] is the upper bound
+		
+		Attributes
+		----------
+		dim    : int
+		   Dimension of the phase space.
+		size   : int
+		   Numbers of initial condition simultaneously computed by the dynamical system
+		bounds : np.array[ shape = (2,dim) ]
+		   Bounds of a box in phase space where initial condition can be drawn.
 		"""
 		self.dim = dim
 		self.size = size
@@ -146,19 +146,19 @@ class DynamicalSystem:
 	
 	def __call__( self , X , t ):
 		"""
-			Return the value of the equation of the dynamical system at point X (and time t if continuous)
-
-			Parameters
-			----------
-			X   : np.array[ shape = (self.size * self.dim) ]
-			   Vector to computes the derivative.
-			t   : float
-			   Time to computes the derivative. (not used if system is discrete)
-
-			Returns
-			-------
-			out : array_like
-			   Derivative of the dynamical system at point X and time t
+		Return the value of the equation of the dynamical system at point X (and time t if continuous)
+		
+		Parameters
+		----------
+		X   : np.array[ shape = (self.size * self.dim) ]
+		   Vector to computes the derivative.
+		t   : float
+		   Time to computes the derivative. (not used if system is discrete)
+		
+		Returns
+		-------
+		out : array_like
+		   Derivative of the dynamical system at point X and time t
 		"""
 		return self._equation( X , t )
 	
@@ -170,25 +170,26 @@ class DynamicalSystem:
 
 	def orbit( self , time , X0 = None ):
 		"""
-			Build an orbit of the dynamical system. If self.size > 1, a snapshot attractor [1] is built.
-
-			Parameters
-			----------
-			time : array_like
-			   An array of time to estimate the value of dynamical system
-			X0   : np.array[ shape = ( self.size , self.dim ) ]
-			   Initial condition corresponding to time[0].
-					=> If X0 is None, self.randomIC() is called
-			
-			Returns
-			-------
-			out  : array_like
-			   An array of the orbit. The shape is (len(time),self.size,self.dim)
-			
-			Ref
-			---
-			[1] Romeiras, F. J., Grebogi, C., and Ott, E.: Multifractal properties of snapshot attractors of random maps, 
-			    Phys. Rev A, 41, 784–799, doi:10.1103/PhysRevA.41.784
+		Build an orbit of the dynamical system. If self.size > 1, a snapshot attractor [1] is built.
+		
+		Parameters
+		----------
+		time : array_like
+		   An array of time to estimate the value of dynamical system
+		X0   : np.array[ shape = ( self.size , self.dim ) ]
+		   Initial condition corresponding to time[0].
+				=> If X0 is None, self.randomIC() is called
+		
+		Returns
+		-------
+		out  : array_like
+		   An array of the orbit. The shape is (len(time),self.size,self.dim)
+		
+		Ref
+		---
+		[1] Romeiras, F. J., Grebogi, C., and Ott, E.: Multifractal properties
+		    of snapshot attractors of random maps, Phys. Rev A, 41, 784–799,
+		    doi:10.1103/PhysRevA.41.784
 		"""
 		if X0 is None:
 			X0 = self.randomIC()
