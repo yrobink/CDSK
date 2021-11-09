@@ -3,7 +3,7 @@
 ##################################################################################
 ##################################################################################
 ##                                                                              ##
-## Copyright Yoann Robin, 2019                                                  ##
+## Copyright Yoann Robin, 2021                                                  ##
 ##                                                                              ##
 ## yoann.robin.k@gmail.com                                                      ##
 ##                                                                              ##
@@ -44,7 +44,7 @@
 ##################################################################################
 ##################################################################################
 ##                                                                              ##
-## Copyright Yoann Robin, 2019                                                  ##
+## Copyright Yoann Robin, 2021                                                  ##
 ##                                                                              ##
 ## yoann.robin.k@gmail.com                                                      ##
 ##                                                                              ##
@@ -83,44 +83,47 @@
 ##################################################################################
 ##################################################################################
 
-## Read release informations
-from CDSK.__release import name
-from CDSK.__release import version
-from CDSK.__release import description
-from CDSK.__release import long_description
-from CDSK.__release import authors
-from CDSK.__release import authors_email
-from CDSK.__release import src_url
-from CDSK.__release import license
+
+version_major = 1
+version_minor = 0
+version_patch = 0
+version_extra = "a1"
+version       = "{}.{}.{}{}".format(version_major,version_minor,version_patch,version_extra)
 
 
-## Required elements
-author           = ", ".join(authors)
-author_email     = ", ".join(authors_email)
-packages         = ["CDSK","CDSK.fractal"]
-package_dir      = { "CDSK" : "CDSK" }
-requires         = [ "numpy",
-					 "scipy",
-					 "matplotlib",
-					 "sklearn",
-					 "SDFC (>=0.5.0)"]
-keywords         = ["Dynamical-system","chaos","attractor","local-dimension"]
-platforms        = ["linux","macosx"]
+##
 
-## Now the setup
-from distutils.core import setup
+name = "CDSK"
 
-setup(  name             = name,
-		version          = version,
-		description      = description,
-		long_description = long_description,
-		author           = author,
-		author_email     = author_email,
-		url              = src_url,
-		packages         = packages,
-		package_dir      = package_dir,
-		requires         = requires,
-		license          = license,
-		keywords         = keywords,
-		platforms        = platforms
-     )
+
+##
+
+description      = "Chaotic Dynamical System Kit"
+long_description = \
+"""
+Chaotic Dynamical System Kit (CDSK)
+
+- Generation of classic chaotic attractors
+- Generation of Mandelbrot and Julia set
+- Estimation of Local Dimension and persistence
+"""
+
+
+##
+
+license = "CeCILL-C"
+
+
+##
+
+authors       = ["Yoann Robin"]
+authors_email = ["yoann.robin.k@gmail.com"]
+author_doc    = ", ".join( [ ath + " ({})".format(athm) for ath,athm in zip(authors,authors_email) ] )
+
+
+##
+
+src_url = "https://github.com/yrobink/CDSK"
+
+
+
