@@ -223,6 +223,9 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 		vector shape[:,i,j] is the shape between X[:,:,i] and X[:,:,j].  Only
 		the upper part of the matrix is filled. If ld_fit == "mean", shape is
 		always 0.
+	where : np.array[ shape = (n_sample,n_sample_2,n_var,n_var) , dtype = bool ]
+		True if distance between X/Y is greater than the quantile ql, otherwise
+		0.
 	
 	References
 	----------
@@ -288,6 +291,6 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 		alpha[:,i,j] = np.sum( where[:,:,i,i] & where[:,:,j,j] , 1 ) / np.sum(where[:,:,i,i],1)
 	
 	
-	return ld,theta,alpha,shp
+	return ld,theta,alpha,shp,where
 ##}}}
 
