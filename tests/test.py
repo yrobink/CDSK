@@ -340,7 +340,7 @@ if __name__ == "__main__":
 	print(ck.__version__)
 	
 	## Now tests
-	run_all_tests()
+	run_all_tests( ("--plot" in sys.argv) )
 	 
 	
 	print("Done")
