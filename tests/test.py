@@ -341,7 +341,6 @@ if __name__ == "__main__":
 	
 	## Now tests
 	run_all_tests( ("--plot" in sys.argv) )
-	 
 	
 	print("Done")
 
