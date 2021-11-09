@@ -134,7 +134,6 @@ class DynamicalSystem:
 		self.dim = dim
 		self.size = size
 		self.bounds = bounds
-		self._i = [ np.array( np.arange( i , self.dim * self.size , self.dim ) , dtype = np.int ) for i in range(self.dim) ]
 	
 	def randomIC( self ):
 		"""

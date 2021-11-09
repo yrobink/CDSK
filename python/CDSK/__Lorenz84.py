@@ -210,9 +210,9 @@ class Lorenz84(DiffDynSyst):
 	
 	def _equation( self , X , t ):
 		dX = np.zeros(X.shape)
-		dX[self._i[0]] = - X[self._i[1]]**2 - X[self._i[2]]**2 - self.a * X[self._i[0]] + self.a * self.F(t)
-		dX[self._i[1]] = X[self._i[0]] * X[self._i[1]] - self.b * X[self._i[0]] * X[self._i[2]] - X[self._i[1]] + self.G
-		dX[self._i[2]] = X[self._i[0]] * X[self._i[2]] + self.b * X[self._i[0]] * X[self._i[1]] - X[self._i[2]]
+		dX[::3]  = - X[1::3]**2 - X[2::3]**2 - self.a * X[::3] + self.a * self.F(t)
+		dX[1::3] = X[::3] * X[1::3] - self.b * X[::3] * X[2::3] - X[1::3] + self.G
+		dX[2::3] = X[::3] * X[2::3] + self.b * X[::3] * X[1::3] - X[2::3]
 		return dX
 
 

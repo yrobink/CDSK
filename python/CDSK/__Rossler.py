@@ -132,9 +132,9 @@ class Rossler(DiffDynSyst):
 
 	def _equation( self , X , t ):
 		dX = np.zeros(X.shape)
-		dX[self._i[0]] = - X[self._i[1]] - X[self._i[2]]
-		dX[self._i[1]] = X[self._i[0]] + self.a * X[self._i[1]]
-		dX[self._i[2]] = self.b + X[self._i[2]] * ( X[self._i[0]] - self.c )
+		dX[::3] = - X[1::3] - X[2::3]
+		dX[1::3] = X[::3] + self.a * X[1::3]
+		dX[2::3] = self.b + X[2::3] * ( X[::3] - self.c )
 		return dX
 
 

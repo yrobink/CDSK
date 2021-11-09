@@ -130,11 +130,11 @@ class Mira(DiscDynSyst):
 		self.b = b
 	
 	def _F( self , x ):
-		return self.a * x + 2 * ( 1 - self.a ) * np.power( x , 2 ) / ( 1 + np.power( x , 2 ) )
+		return self.a * x + 2 * ( 1 - self.a ) * x**2 / ( 1 + x**2 )
 	
 	def _equation( self , X , t = None ):
 		Xnext = np.zeros_like(X)
-		Xnext[self._i[0]] = self.b * X[self._i[1]] + self._F( X[self._i[0]] )
-		Xnext[self._i[1]] = - X[self._i[0]] + self._F( Xnext[self._i[0]] )
+		Xnext[::2]  = self.b * X[1::2] + self._F( X[::2] )
+		Xnext[1::2] = - X[::2] + self._F( Xnext[::2] )
 		return Xnext
 	

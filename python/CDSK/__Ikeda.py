@@ -136,8 +136,8 @@ class Ikeda(DiscDynSyst):
 	
 	def _equation( self , X , t = None ):
 		Xnext = np.zeros_like(X)
-		tau = self.C1 - self.C3 / ( 1. + np.power( X[self._i[0]] , 2 ) + np.power( X[self._i[1]] , 2 ) )
-		Xnext[self._i[0]] = self.R + self.C2 * ( X[self._i[0]] * np.cos(tau) - X[self._i[1]] * np.sin(tau) )
-		Xnext[self._i[1]] = self.C2 * ( X[self._i[1]] * np.cos(tau) + X[self._i[0]] * np.sin(tau) )
+		tau = self.C1 - self.C3 / ( 1. + X[::2]**2 + X[1::2]**2 )
+		Xnext[::2]  = self.R + self.C2 * ( X[::2] * np.cos(tau) - X[1::2] * np.sin(tau) )
+		Xnext[1::2] = self.C2 * ( X[1::2] * np.cos(tau) + X[::2] * np.sin(tau) )
 		return Xnext
 	

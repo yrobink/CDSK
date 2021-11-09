@@ -136,9 +136,9 @@ class Lorenz63(DiffDynSyst):
 	
 	def _equation( self , X , t ):
 		dX = np.zeros_like(X)
-		dX[self._i[0]] = self.s * ( X[self._i[1]] - X[self._i[0]] )
-		dX[self._i[1]] = self.r * X[self._i[0]] - X[self._i[1]] - X[self._i[0]] * X[self._i[2]] 
-		dX[self._i[2]] = X[self._i[0]] * X[self._i[1]] - self.b * X[self._i[2]]
+		dX[::3]  = self.s * ( X[1::3] - X[::3] )
+		dX[1::3] = self.r * X[::3] - X[1::3] - X[::3] * X[2::3] 
+		dX[2::3] = X[::3] * X[1::3] - self.b * X[2::3]
 		return dX
 	
 	def jacobian( self , X , t ):

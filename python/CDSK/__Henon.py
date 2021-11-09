@@ -131,7 +131,7 @@ class Henon(DiscDynSyst):
 	
 	def _equation( self , X , t = None ):
 		Xnext = np.zeros_like(X)
-		Xnext[self._i[0]] = X[self._i[1]] + 1 - self.a * np.power( X[self._i[0]] , 2 )
-		Xnext[self._i[1]] = self.b * X[self._i[0]]
+		Xnext[::2]  = X[1::2] + 1 - self.a * np.power( X[::2] , 2 )
+		Xnext[1::2] = self.b * X[::2]
 		return Xnext
 	
