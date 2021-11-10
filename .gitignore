@@ -128,9 +128,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+## R files
+R/*.tar.gz
+R/CDSK/man/*
+
 ## Others files
 *.swp
 ./*.png
 *.nc
 data
 tests/output
+
