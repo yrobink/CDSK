@@ -517,6 +517,24 @@ run_all_tests = function( plot = FALSE )##{{{
 }
 ##}}}
 
+test_dynamical_local_indexes = function()
+{
+	## Data
+	l63 = CDSK::Lorenz63$new( size = 1000 )
+	X01 = l63$orbit( base::seq( 0 , 100 , length = 10000 ) )[10000,,]
+	l63 = CDSK::Lorenz63$new()
+	y0  = l63$orbit( base::seq( 0 , 100 , length = 10000 ) )[10000,]
+	y1  = y0 + stats::rnorm( mean = 0 , sd = 0.1 , n = 3 )
+	Y0  = l63$orbit( base::seq( 0 , 100 , length = 10000 ) , y0 )
+	Y1  = l63$orbit( base::seq( 0 , 100 , length = 10000 ) , y1 )
+	
+	X = abind( X01 , X01 )
+	Y = abind(  Y0 ,  Y1 )
+	
+	## Args
+	dli = dynamical_local_indexes( X , Y )
+
+}
 
 
 ##########
