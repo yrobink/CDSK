@@ -82,14 +82,6 @@
 ##################################################################################
 ##################################################################################
 
-abind = function( X0 , X1 )##{{{
-{
-	X = array( NA , dim = base::c(dim(X0),2) )
-	X[,,1] = X0
-	X[,,2] = X1
-	return(X)
-}
-##}}}
 
 local_dimension = function( dist , q , ld_fit )##{{{
 {
@@ -143,24 +135,60 @@ persistence = function( idx , ql , theta_fit )##{{{
 }
 ##}}}
 
-dynamical_local_indexes = function( X , Y = NULL , ql = 0.98 , ld_fit = "mean" , theta_fit = "sueveges" , ... )#{{{
+## dynamical_local_indexes ##{{{
+
+#' dynamical_local_indexes
+#'
+#' Compute the local dimension, persistence and co-reccurrence of a dataset
+#'
+#' @importFrom pmetric pairwise_distances
+#'
+#' @param X [array] A first matrix  (n_samples x n_features x n_variables).
+#'        Point where you want the local dimension and persistance
+#' @param Y [array] A second matrix (n_samples x n_features x n_variables).
+#'        Point to estimate ld and theta. If Y = NULL, X is used
+#' @param ql [float] Threshold, default = 0.98
+#' @param ld_fit [string] Method for compute local_dimension. Currently, only
+#'        the mean method is supported, assuming the shape parameters of the GPD
+#'        is 0.
+#' @param theta_fit [string] Method to fit the persistence. "sueveges" or
+#'        "ferro".
+#' @param metric [string or function] Metric used for pairwise distances between
+#'        X and Y. See the function pmetric::pairwise_distances. Default is
+#'        "euclidean".
+#' @param cross_metric [function] Metric for co-reccurences. Default is the
+#'        square of euclidean distance.
+#'
+#' @return ld,theta,alpha,shp,where [list] list containing local dimension,
+#'         persistence, co-recurrences, shape. 'where' is an array such that
+#'         where[i,j,v1,v2] is TRUE if the -log of the distance between X[i,,v1]
+#'         and Y[j,,v2] is greater than the quantile ql.
+#'
+#' @examples
+#' l63 = CDSK::Lorenz63$new()
+#' t = base::seq( 0 , 100 , length = 10000 )
+#' O = l63$orbit(t)[5001:10000,]
+#' X = array( NA , dim = base::c( 5000 , 2 , 3 ) )
+#' X[,,1] = O[,1:2]
+#' X[,,2] = O[,2:3]
+#' X[,,3] = O[,base::c(1,3)]
+#' dli = CDSK::dynamical_local_indexes(X)
+#'
+#' @export
+dynamical_local_indexes = function( X , Y = NULL , ql = 0.98 , ld_fit = "mean" , theta_fit = "sueveges" , metric = "euclidean" , cross_metric = function(x,y) { return(x^2+y^2) } )
 {
-	kwargs = list(...)
 	## Read args
-	metric = kwargs[["metric"]]
-	cross_metric = kwargs[["cross_metric"]]
-	Y = kwargs[["Y"]]
-	if( is.null(metric) ) metric = "euclidean"
-	if( is.null(cross_metric) ) cross_metric = function(x,y) { return(x^2+y^2) }
-	if( is.null(Y) ) Y = X
+	if( is.null(Y) )
+		Y = X
 	
 	n_samplesX = dim(X)[1]
 	n_samplesY = dim(Y)[1]
 	n_features = dim(X)[2]
 	n_traj     = dim(X)[3]
 	
+	
 	## Distances
-	dist = array( NA , base::c(n_samplesX,n_samplesY,n_features,n_traj) )
+	dist = array( NA , base::c(n_samplesX,n_samplesY,n_traj,n_traj) )
 	
 	for( i in 1:n_traj )
 	{
