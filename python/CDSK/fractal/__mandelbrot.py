@@ -153,6 +153,14 @@ class Mandelbrot:
 		except:
 			raise NameError("Need (x,y) set or (classic_set,nx [,ny]) set!")
 	
+	@property
+	def x(self):
+		return self._x
+	
+	@property
+	def y(self):
+		return self._y
+	
 	def run(self):
 		"""
 		Run estimation
@@ -166,38 +174,6 @@ class Mandelbrot:
 			idx[ np.abs(z) < 2 ] += 1
 		
 		self.ratio = idx.reshape( (self._nx,self._ny) ) / self._maxit
-	
-	def plot( self , show = False ):
-		"""
-		Plot the Mandelbrot set (after run).
-		
-		Parameters
-		----------
-		
-		show : bool
-			Call plt.show() or no. Default is False
-		"""
-		X,Y = np.meshgrid( self._x , self._y )
-		sx = min( max( self._ny / 100 , 5 ) , 10 )
-		sy = min( max( self._nx / 100 , 5 ) , 10 )
-		
-		fig = plt.figure( figsize = (sx,sy) )
-		ax  = fig.add_subplot( 1 , 1 , 1 )
-		ax.pcolormesh( X , Y , self.ratio.T , cmap = plt.cm.hot_r )
-		fig.set_tight_layout(True)
-		if show: plt.show()
-		return fig
-	
-	def export( self , ofile ):
-		"""
-		Export an image of Mandelbrot set.
-		
-		Parameters
-		----------
-		ofile : str
-			Name of file
-		"""
-		mpl.image.imsave( ofile , np.rot90(self.ratio) , cmap = plt.cm.hot_r )
 	
 	def _set_set0( self ):
 		self._x = np.linspace( -0.62 , -0.42 , self._nx )
