@@ -517,6 +517,16 @@ run_all_tests = function( plot = FALSE )##{{{
 }
 ##}}}
 
+
+abind = function( X0 , X1 )##{{{
+{
+	X = array( NA , dim = base::c(dim(X0),2) )
+	X[,,1] = X0
+	X[,,2] = X1
+	return(X)
+}
+##}}}
+
 test_dynamical_local_indexes = function()
 {
 	## Data
