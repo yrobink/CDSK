@@ -8,7 +8,7 @@
 
 ## Installation
 
-Requires the [pmetric](https://github.com/yrobink/pmetric) packages.
+Require the [pmetric](https://github.com/yrobink/pmetric) packages.
 
 The file *build.R* can be used to compile and install CDSK. For almost all users, it is sufficient to launch:
 
