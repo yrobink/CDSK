@@ -138,4 +138,4 @@ R/CDSK/man/*
 *.nc
 data
 tests/output
-
+examples/*.png
