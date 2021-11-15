@@ -2,7 +2,7 @@ Package: CDSK
 Type: Package
 Title: Chaotic Dynamical System Kit
 Version: 1.0.0
-Date: 2021-11-10
+Date: 2021-11-15
 Authors@R: person("Yoann", "Robin", email = "yoann.robin.k@gmail.com", role = c("aut", "cre"))
 Description: Generation of chaotic attractor and fit local dimension. An
              extensible interface for continuous and discrete dynamical system
@@ -14,5 +14,5 @@ Description: Generation of chaotic attractor and fit local dimension. An
 License: CeCILL-2
 Encoding: UTF-8
 LazyData: true
-Imports: R6, deSolve, pmetric
+Imports: R6, deSolve, pmetric, ROOPSD
 RoxygenNote: 7.1.1

@@ -82,21 +82,32 @@
 ##################################################################################
 ##################################################################################
 
+gpd_fit = function(dNA)##{{{
+{
+	dNA = dNA[is.finite(dNA)]
+	gpd = base::try(ROOPSD::GPD$new()$fit(dNA,loc=0),silent=TRUE)
+	if( "try-error" %in% class(gpd) )
+	{
+		return( base::c( 1. / base::mean(dNA,na.rm=TRUE) , 0 ) )
+	}
+	return(base::c(gpd$scale,gpd$shape))
+}
+##}}}
 
 local_dimension = function( dist , q , ld_fit )##{{{
 {
 	q  = matrix( q , nrow = length(q) )
-	ld = base::apply( dist , 2 , function(x) { x - q } )
-	ld[ld < 0] = NA
+	dNA = base::apply( dist , 2 , function(x) { x - q } )
+	dNA[dNA < 0] = NA
 	if( ld_fit == "GPD" )
 	{
-		print("Warning: GPD fit not implemented")
-		ld  = 0
-		shp = 0
+		ldshp = base::apply( dNA , 1 , gpd_fit )
+		ld  = ldshp[1,]
+		shp = ldshp[2,]
 	}
 	else
 	{
-		ld  = 1. / base::apply( ld , 1 , base::mean , na.rm = TRUE )
+		ld  = 1. / base::apply( dNA , 1 , base::mean , na.rm = TRUE )
 		shp = 0
 	}
 	

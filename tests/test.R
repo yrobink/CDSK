@@ -177,6 +177,16 @@ plt = PlotTools$new()
 ## Functions ##
 ###############
 
+abind = function( X0 , X1 )##{{{
+{
+	X = array( NA , dim = base::c(dim(X0),2) )
+	X[,,1] = X0
+	X[,,2] = X1
+	return(X)
+}
+##}}}
+
+
 ## How SDCK run {{{
 
 lorenz63 = function( t , X , parms = list( s = 10 , r = 28 , b = 2.667 , size = 1 ) )
@@ -441,33 +451,23 @@ test_mira = function( plot = FALSE )##{{{
 ##}}}
 
 
-test_local_dimension = function( plot = FALSE )##{{{
+test_dynamical_local_indexes = function()##{{{
 {
-	## generate a long orbit
-	t  = base:::seq( 0 , 50 , length = 5000 )
-	size = 1
-	l63 = Lorenz63$new( size = size )
-	X0  = l63$orbit( t = base::seq( 0 , 10 , length = 1000 ) )[1000,]
-	Y   = l63$orbit( t = t , X0 = X0 )
+	## Data
+	l63 = CDSK::Lorenz63$new( size = 1000 )
+	X01 = l63$orbit( base::seq( 0 , 50 , length = 1000 ) )[1000,,]
+	l63 = CDSK::Lorenz63$new()
+	y0  = l63$orbit( base::seq( 0 , 50 , length = 1000 ) )[1000,]
+	y1  = y0 + stats::rnorm( mean = 0 , sd = 0.1 , n = 3 )
+	Y0  = l63$orbit( base::seq( 0 , 50 , length = 1000 ) , y0 )
+	Y1  = l63$orbit( base::seq( 0 , 50 , length = 1000 ) , y1 )
 	
-	## Generate a snapshot
-	l63 = Lorenz63$new( size = 1000 )
-	X   = l63$orbit( t = base::seq( 0 , 20 , length = 1000 ) )[1000,,]
+	X = abind( X01 , X01 )
+	Y = abind(  Y0 ,  Y1 )
 	
-	## Find local dimension at "snapshot point" with orbit Y (if Y == NULL, then Y = X)
-	ldth = localDimension( X , Y )
-	
-	if( plot )
-	{
-		plt$new_screen()
-		graphics::par( mfrow = base::c( 1 , 2 ) )
-		
-		## Plot0
-		plot3D::scatter3D( X[,1] , X[,2] , X[,3] , colvar = ldth$ld , col = plot3D::ramp.col( base::c("blue","yellow","red") ) , clim = base::c(0.5 , 3.5 ) , main = base::paste( "Local dimension, mean : " , base::round( base::mean(ldth$ld) ,2 ) ) )
-		
-		## Plot1
-		plot3D::scatter3D( X[,1] , X[,2] , X[,3] , colvar = ldth$th , col = plot3D::ramp.col( base::c("blue","yellow","red") ) , main = "Persistence" )
-	}
+	## Args
+	dli <<- dynamical_local_indexes( X , Y , ld_fit = "GPD" )
+
 }
 ##}}}
 
@@ -510,41 +510,12 @@ run_all_tests = function( plot = FALSE )##{{{
 	test_mira( plot )
 	test_henon( plot )
 	
-	test_local_dimension( plot )
+	test_dynamical_local_indexes()
 	
 	test_mandelbrot( plot )
 	test_julia( plot )
 }
 ##}}}
-
-
-abind = function( X0 , X1 )##{{{
-{
-	X = array( NA , dim = base::c(dim(X0),2) )
-	X[,,1] = X0
-	X[,,2] = X1
-	return(X)
-}
-##}}}
-
-test_dynamical_local_indexes = function()
-{
-	## Data
-	l63 = CDSK::Lorenz63$new( size = 1000 )
-	X01 = l63$orbit( base::seq( 0 , 100 , length = 10000 ) )[10000,,]
-	l63 = CDSK::Lorenz63$new()
-	y0  = l63$orbit( base::seq( 0 , 100 , length = 10000 ) )[10000,]
-	y1  = y0 + stats::rnorm( mean = 0 , sd = 0.1 , n = 3 )
-	Y0  = l63$orbit( base::seq( 0 , 100 , length = 10000 ) , y0 )
-	Y1  = l63$orbit( base::seq( 0 , 100 , length = 10000 ) , y1 )
-	
-	X = abind( X01 , X01 )
-	Y = abind(  Y0 ,  Y1 )
-	
-	## Args
-	dli = dynamical_local_indexes( X , Y )
-
-}
 
 
 ##########
