@@ -166,9 +166,9 @@ persistence = function( idx , ql , theta_fit )##{{{
 #'
 #' @examples
 #' l63 = CDSK::Lorenz63$new()
-#' t = base::seq( 0 , 100 , length = 10000 )
-#' O = l63$orbit(t)[5001:10000,]
-#' X = array( NA , dim = base::c( 5000 , 2 , 3 ) )
+#' t = base::seq( 0 , 100 , length = 1000 )
+#' O = l63$orbit(t)[501:1000,]
+#' X = array( NA , dim = base::c( 500 , 2 , 3 ) )
 #' X[,,1] = O[,1:2]
 #' X[,,2] = O[,2:3]
 #' X[,,3] = O[,base::c(1,3)]
