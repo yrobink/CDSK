@@ -202,7 +202,12 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 		Metric used between sample of X and Y, see sklearn.metrics.pairwise.pairwise_distances
 	cross_metric: callable = lambda x,y : np.sqrt(x**2+y**2)
 		Metric used between two variables.
-	
+	return_shape: bool = False
+		Return the shape estimated by the GPD fit.
+	return_dist: bool = False
+		Return the pairwise distances.
+	return_where: bool = False
+		Return the 'where' matrix.
 	
 	Returns
 	-------
@@ -218,11 +223,16 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 		Co-recurrences of elements of X. The vector alpha[:,i,j] is the
 		co-recurrences between X[:,:,i] and X[:,:,j].  Only the upper part of
 		the matrix is filled. See [1].
+	
+	Optional returns
+	----------------
 	shape : np.array[ shape = (n_sample,n_var,n_var) ]
 		Shape estimated for the GPD during the fit of local dimension. The
 		vector shape[:,i,j] is the shape between X[:,:,i] and X[:,:,j].  Only
 		the upper part of the matrix is filled. If ld_fit == "mean", shape is
 		always 0.
+	dist  : np.array[ shape = (n_sample,n_sample_2,n_var,n_var) ]
+		Pairwise distances between X and Y.
 	where : np.array[ shape = (n_sample,n_sample_2,n_var,n_var) , dtype = bool ]
 		True if distance between X/Y is greater than the quantile ql, otherwise
 		0.
@@ -241,6 +251,15 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 	if metric is None: metric = "euclidean"
 	cross_metric = kwargs.get("cross_metric")
 	if cross_metric is None: cross_metric = lambda x,y : np.sqrt(x**2+y**2)
+	return_shape = kwargs.get("return_shape")
+	return_dist  = kwargs.get("return_dist")
+	return_where = kwargs.get("return_where")
+	if return_shape is None:
+		return_shape = False
+	if return_dist is None:
+		return_dist = False
+	if return_where is None:
+		return_where = False
 	
 	## Data in good format
 	if X.ndim == 2:
@@ -290,7 +309,16 @@ def dynamical_local_indexes( X , Y = None , ql = 0.98 , ld_fit = "SDFC" , theta_
 	for i,j in itt.combinations_with_replacement(range(n_traj),2):
 		alpha[:,i,j] = np.sum( where[:,:,i,i] & where[:,:,j,j] , 1 ) / np.sum(where[:,:,i,i],1)
 	
+	## Build tuple output
+	out = (ld,theta,alpha)
 	
-	return ld,theta,alpha,shp,where
+	if return_shape:
+		out = out + (shp,)
+	if return_dist:
+		out = out + (dist,)
+	if return_where:
+		out = out + (where,)
+	
+	return out
 ##}}}
 
