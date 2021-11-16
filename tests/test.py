@@ -268,7 +268,7 @@ def test_local_dimension():##{{{
 		X = np.stack( (X01,X01) , -1 )
 		Y = np.stack( (Y0,Y1) , -1 )
 		
-		ld,theta,alpha,shape,where = ck.dynamical_local_indexes( X , Y = Y , ld_fit = "mean" , n_jobs = 6 )
+		ld,theta,alpha = ck.dynamical_local_indexes( X , Y = Y , ld_fit = "mean" , n_jobs = 6 )
 		
 		fig  = plt.figure()
 		grid = mplg.GridSpec( 6 , 3 )
@@ -410,7 +410,6 @@ if __name__ == "__main__":
 	
 	## Now tests
 	run_all_tests()
-	
 	
 	print("Done")
 

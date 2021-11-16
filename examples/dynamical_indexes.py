@@ -68,7 +68,7 @@ if __name__ == "__main__":
 		df.to_netcdf(f_data)
 	
 	## Arguments
-	kwargs = { "ld_fit" : "SDFC" }
+	kwargs = { "ld_fit" : "SDFC" , "return_shape" : True }
 	
 	## Pairwise projections
 	X2 = np.zeros( (df.ref.size,2,3) )
@@ -79,12 +79,12 @@ if __name__ == "__main__":
 	Y2[:,:,0] = df.Y[:,[0,1]]
 	Y2[:,:,1] = df.Y[:,[0,2]]
 	Y2[:,:,2] = df.Y[:,[1,2]]
-	ld2,theta2,alpha2,shp2,where2 = cs.dynamical_local_indexes( X2 , Y2 , **kwargs )
+	ld2,theta2,alpha2,shp2 = cs.dynamical_local_indexes( X2 , Y2 , **kwargs )
 	
 	## 3d attractor
 	X3 = df.X.values
 	Y3 = df.Y.values
-	ld3,theta3,alpha3,shp3,where3 = cs.dynamical_local_indexes( X3 , Y3 , **kwargs )
+	ld3,theta3,alpha3,shp3 = cs.dynamical_local_indexes( X3 , Y3 , **kwargs )
 	
 	## Figures
 	l_cmap = [plt.cm.inferno,plt.cm.turbo,plt.cm.binary,plt.cm.coolwarm]
