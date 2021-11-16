@@ -164,16 +164,20 @@ persistence = function( idx , ql , theta_fit )##{{{
 #'        is 0.
 #' @param theta_fit [string] Method to fit the persistence. "sueveges" or
 #'        "ferro".
-#' @param metric [string or function] Metric used for pairwise distances between
-#'        X and Y. See the function pmetric::pairwise_distances. Default is
-#'        "euclidean".
-#' @param cross_metric [function] Metric for co-reccurences. Default is the
-#'        square of euclidean distance.
+#' @param ... Others parameters:
+#'        metric [string or function] Metric used for pairwise distances between
+#'           X and Y. See the function pmetric::pairwise_distances. Default is
+#'           "euclidean".
+#'        cross_metric [function] Metric for co-reccurences. Default is the
+#'           square of euclidean distance.
+#'        return_shape [bool] Return the shape fitted of the GPD distribution.
+#'        return_dist [bool] Return the pairwise distances.
+#'        return_where [bool] Return the where matrix.
 #'
-#' @return ld,theta,alpha,shp,where [list] list containing local dimension,
-#'         persistence, co-recurrences, shape. 'where' is an array such that
-#'         where[i,j,v1,v2] is TRUE if the -log of the distance between X[i,,v1]
-#'         and Y[j,,v2] is greater than the quantile ql.
+#' @return ld,theta,alpha[,shape,dist,where] [list] list containing local
+#'         dimension, persistence, co-recurrences, shape. 'where' is an array
+#'         such that where[i,j,v1,v2] is TRUE if the -log of the distance
+#'         between X[i,,v1] and Y[j,,v2] is greater than the quantile ql.
 #'
 #' @examples
 #' l63 = CDSK::Lorenz63$new()
@@ -186,8 +190,28 @@ persistence = function( idx , ql , theta_fit )##{{{
 #' dli = CDSK::dynamical_local_indexes(X)
 #'
 #' @export
-dynamical_local_indexes = function( X , Y = NULL , ql = 0.98 , ld_fit = "mean" , theta_fit = "sueveges" , metric = "euclidean" , cross_metric = function(x,y) { return(x^2+y^2) } )
+dynamical_local_indexes = function( X , Y = NULL , ql = 0.98 , ld_fit = "mean" , theta_fit = "sueveges" , ... )
 {
+	## Read kwargs
+	kwargs = list(...)
+	metric = kwargs[["metric"]]
+	cross_metric = kwargs[["cross_metric"]]
+	return_shape = kwargs[["return_shape"]]
+	return_dist  = kwargs[["return_dist"]]
+	return_where = kwargs[["return_where"]]
+	
+	if( is.null(metric) )
+		metric = "euclidean"
+	if( is.null(cross_metric) )
+		cross_metric = function(x,y) { return(x^2+y^2) }
+	if( is.null(return_shape) )
+		return_shape = FALSE
+	if( is.null(return_dist) )
+		return_dist = FALSE
+	if( is.null(return_where) )
+		return_where = FALSE
+	
+	
 	## Read args
 	if( is.null(Y) )
 		Y = X
@@ -261,7 +285,16 @@ dynamical_local_indexes = function( X , Y = NULL , ql = 0.98 , ld_fit = "mean" ,
 		}
 	}
 	
-	invisible( list( ld = ld , theta = theta , alpha = alpha , shp = shp , where = where ) )
+	## Output
+	out = list( ld = ld , theta = theta , alpha = alpha )
+	if( return_shape )
+		out[["shape"]] = shp
+	if( return_dist )
+		out[["dist"]] = dist
+	if( return_where )
+		out[["where"]] = where
+	
+	invisible(out)
 }
 ##}}}
 
