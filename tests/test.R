@@ -466,7 +466,7 @@ test_dynamical_local_indexes = function()##{{{
 	Y = abind(  Y0 ,  Y1 )
 	
 	## Args
-	dli <<- dynamical_local_indexes( X , Y , ld_fit = "GPD" )
+	dli = dynamical_local_indexes( X , Y , return_shape = TRUE )
 
 }
 ##}}}
