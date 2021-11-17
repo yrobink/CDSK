@@ -187,6 +187,16 @@ Lorenz84TimeForcing = R6::R6Class( "Lorenz84TimeForcing" ,
 #' @details
 #' Continuous dynamical system.
 #'
+#' @references E. N. Lorenz, "Irregularity : a Fundamental property of the
+#'             atmosphere", In Tellus A, vol. 36, n. 2, p. 98-110 (1984)
+#'
+#' @references E. N. Lorenz, "Can chaos and intransitivity lead to interannual
+#'             variability?", In Tellus A, vol.42, n. 3, p. 378-389 (1990)
+#'
+#' @references G. Drotos and al, “Probabilistic concepts in a changing climate :
+#'             a snapshot attractor picture”. In : Jour. Clim., vol. 28, n. 8,
+#'             p. 3275–3288 (2015)
+#'
 #' @examples
 #' l84 = CDSK::Lorenz84$new( size = 200 , F = "cyclic" )
 #' t = base::seq( 0 , 100 , 0.005 )

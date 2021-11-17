@@ -102,6 +102,9 @@
 #' @details
 #' Continuous dynamical system.
 #'
+#' @references O. E. Rossler, « An equation for continuous chaos », Phys. Rev.
+#'             Lett. A, vol. 57, np5, 1976, p. 397-398
+#'
 #' @examples
 #' ross = CDSK::Rossler$new( size = 200 )
 #' t = base::seq( 0 , 100 , 0.005 )

@@ -179,6 +179,13 @@ persistence = function( idx , ql , theta_fit )##{{{
 #'         such that where[i,j,v1,v2] is TRUE if the -log of the distance
 #'         between X[i,,v1] and Y[j,,v2] is greater than the quantile ql.
 #'
+#' @references Messori. G. and Faranda, D. (2021) Technical note: Characterising
+#'             and comparing different palaeoclimates with dynamical systems
+#'             theory. Clim. Past, 17, 545–563. doi:10.5194/cp-17-545-2021.
+#' 
+#' @references Süveges, Mária. 2007. Likelihood estimation of the extremal
+#'             index. Extremes, 10.1-2, 41-55, doi:10.1007/s10687-007-0034-2
+#'
 #' @examples
 #' l63 = CDSK::Lorenz63$new()
 #' t = base::seq( 0 , 100 , length = 1000 )

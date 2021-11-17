@@ -1,8 +1,5 @@
 # CDSK (Chaotic Dynamical System Kit)
 
-## TODO
-- Add references
-
 ## Features
 - python3 and R version
 - Generation of classic chaotic attractors

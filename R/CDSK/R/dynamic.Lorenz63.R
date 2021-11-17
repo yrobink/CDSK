@@ -102,6 +102,9 @@
 #' @details
 #' Continuous dynamical system.
 #'
+#' @references E. N. Lorenz, « Deterministic nonperiodic flow », J. Atmos. Sci.,
+#'             vol. 20, no 2, 1963, p. 130-141
+#'
 #' @examples
 #' l63 = CDSK::Lorenz63$new( size = 200 )
 #' t = base::seq( 0 , 100 , 0.005 )
