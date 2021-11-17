@@ -7,8 +7,8 @@
 - Estimation of Local Dimension and persistence
 
 ## Note
-CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package.
-
+For python, CDSK requires the [SDFC](https://github.com/yrobink/SDFC) package,
+and for R, the [pmetric](https://github.com/yrobink/pmetric) package.
 
 ## Example
 

@@ -11,8 +11,7 @@ Description: Generation of chaotic attractor and fit local dimension. An
              attractors are proposed: Lorenz base, Rossler, Henon, etc.
              Furthermore, a code to compute local dimension and persistance of
              a dynamical system is proposed.
-License: CeCILL-2
+License: GPL-3
 Encoding: UTF-8
-LazyData: true
 Imports: R6, deSolve, pmetric, ROOPSD
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
