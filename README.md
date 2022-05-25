@@ -1,5 +1,13 @@
 # CDSK (Chaotic Dynamical System Kit)
 
+## Clone
+
+Python and R version are given in git submodules, so use:
+
+~~~bash
+git clone --recurse-submodules https://github.com/yrobink/CDSK
+~~~
+
 ## Features
 - python3 and R version
 - Generation of classic chaotic attractors
