@@ -1,0 +1,6 @@
+[submodule "R"]
+	path = R
+	url = git@github.com:yrobink/CDSK-R.git
+[submodule "python"]
+	path = python
+	url = git@github.com:yrobink/CDSK-python.git
